@@ -1,0 +1,103 @@
+<odoo>
+	
+	<record id="action_student_marksheet_line" model="ir.actions.act_window">
+		<field name="name">Marksheet Line</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">student.marksheet.line</field>
+		<field name="view_mode">tree,graph,form</field>
+	</record>
+	
+	<menuitem id="menu_school_marksheet_line"
+			  name="Marksheet Line"
+			  parent="menu_school_examination_root"
+			  action="action_student_marksheet_line" 
+			  sequence="6"/>
+
+	<record id="view_student_marksheet_line_tree" model="ir.ui.view">
+		<field name="name">student.marksheet.line.tree</field>
+		<field name="model">student.marksheet.line</field>
+		<field name="arch" type="xml">
+			<tree string="Marksheet Line" sample="1" >
+				<field name="student_id"/>
+				<field name="total_marks"/>
+				<field name="percentage"/>
+				<field name="grade" attrs="{'invisible':[('evaluation_type','!=','grade')]}"/>
+				<field name="status"/>
+				<field name="evaluation_type" invisible="1"/>
+			</tree>
+		</field>
+	</record>  
+
+	<record id="view_student_marksheet_line_form" model="ir.ui.view">
+		<field name="name">student.marksheet.line.form</field>
+		<field name="model">student.marksheet.line</field>
+		<field name="arch" type="xml">
+			<form string="Marksheet Line">
+				<sheet>
+					<field name="active" invisible="1"/>
+					<group>
+						<field name="student_id"/>
+						<field name="total_marks"/>
+						<field name="percentage"/>
+						<field name="grade"/>
+						<field name="status"/>
+						<field name="evaluation_type"/>
+					</group>
+					<separator string="Results" colspan="4"/>
+					<group colspan="4">
+						<field name="result_line_ids">
+							<tree>
+								<field name="student_id" />
+								<field name="exam_id" options="{'no_open': True}" groups="school_management.group_school_student"/>
+								<field name="marks" />
+								<field name="grade" />
+								<field name="status" />
+							</tree>
+						</field>
+					</group>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers"/>
+					<field name="message_ids" widget="mail_thread"/>
+				</div>
+			</form>
+		</field>
+	</record>
+
+	<record id="view_student_marksheet_line_search" model="ir.ui.view">
+		<field name="name">student.marksheet.line.search</field>
+		<field name="model">student.marksheet.line</field>
+		<field name="arch" type="xml">
+			<search string="Marksheet line">
+				<field name="marksheet_reg_id"/>
+				<field name="student_id"/>
+				<field name="total_marks"/>
+				<field name="percentage"/>
+				<filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+				<newline/>
+				<group expand="0" string="Group By...">
+					<filter string="Marksheet Register" name="group_by_marksheet_register" domain="[]" context="{'group_by':'marksheet_reg_id'}" />
+					<filter string="Student" name="group_by_marksheet_line_status" domain="[]" context="{'group_by':'student_id'}" />
+				</group>
+			</search>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="view_student_marksheet_line_graph">
+		<field name="name">student.marksheet.line.graph</field>
+		<field name="model">student.marksheet.line</field>
+		<field name="arch" type="xml">
+			<graph string="Marksheet Line" type="pie">
+				<field name="total_marks"/>
+				<field name="percentage"/>
+				<field name="student_id"/>
+			</graph>
+			<!-- <graph string="Marksheet Line" type="bar">
+				<field name="student_id"/>
+				<field name="total_marks" type="measure"/>
+				<field name="percentage" type="measure"/>
+			</graph> -->
+		</field>
+	</record>
+
+</odoo>

@@ -1,0 +1,152 @@
+<odoo>
+	
+	<record id="action_school_teacher_assignment" model="ir.actions.act_window">
+		<field name="name">Assignment</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">school.teacher.assignment</field>
+		<field name="view_mode">tree,kanban,form</field>
+	</record>
+
+	<menuitem id="menu_school_teacher_assignment"
+			  name="Assignment"
+			  parent="menu_student_teacher_root"
+			  action="action_school_teacher_assignment"
+			  sequence="2"/>
+
+	<record id="view_school_teacher_assignment_tree" model="ir.ui.view">
+		<field name="name">school.teacher.assignment.tree</field>
+		<field name="model">school.teacher.assignment</field>
+		<field name="arch" type="xml">
+			<tree string="Assignment Information" sample="1" >
+				<field name="name" />
+				<field name="teacher_id" />
+				<field name="standard_id"/>
+				<field name="subject_id" />
+				<field name="assign_date" />
+				<field name="due_date"/>
+				<field name="state" select="1" widget="badge" decoration-info="state in ('draft')"
+															  decoration-success="state in ('active','done')"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="view_school_teacher_assignment_search" model="ir.ui.view">
+		<field name="name">school.teacher.assignment.search</field>
+		<field name="model">school.teacher.assignment</field>
+		<field name="arch" type="xml">
+			<search string="Assignment Information">
+				<filter string="Active" name="active_assign" domain="[('state','=','active')]"/>
+				<separator orientation="vertical"/>
+				<field name="name"/>
+				<field name="teacher_id"/>
+				<field name="standard_id"/>
+				<field name="subject_id"/>
+				<field name="assign_date"/>
+				<field name="due_date"/>
+				<newline/>
+				<group expand="0" string="Group By...">
+					<filter name="state" string="State" context="{'group_by': 'state'}"/>
+					<filter name="teacher" string="Teacher" domain="" context="{'group_by':'teacher_id'}"/>
+					<filter name="subject" string="Subject" domain="" context="{'group_by':'subject_id'}"/>
+					<filter name="standard" string="Standard" domain="" context="{'group_by':'standard_id'}"/>
+					<filter name="assign_date" string="Assign Date" domain="" context="{'group_by':'assign_date'}"/>
+				</group>
+			</search>
+		</field>
+	</record>
+
+	<record id="view_school_teacher_assignment_kanban" model="ir.ui.view">
+		<field name="name">school.teacher.assignment.kanban</field>
+		<field name="model">school.teacher.assignment</field>
+		<field name="arch" type="xml">
+			<kanban>
+				<field name="name"/>
+				<field name="teacher_id"/>
+				<field name="standard_id"/>
+				<field name="subject_id"/>
+				<field name="assign_date"/>
+				<field name="due_date"/>
+				<templates>
+					<t t-name="kanban-box">
+						<div t-attf-class="oe_kanban_content oe_kanban_global_click">
+							<ul>
+								<li>
+									<strong>Assignment ID : </strong> <field name="name"/>
+								</li>       
+								<li>
+									<strong>Teacher ID : </strong><field name="teacher_id"/>
+								</li>
+								<li>
+									<strong>Standard : </strong><field name="standard_id"/>
+								</li>
+								<li>
+									<strong>Subject : </strong><field name="subject_id"/>
+								</li>
+								<li>
+									<strong>Assign Date : </strong><field name="assign_date"/>
+								</li>
+								<li>
+									<strong>Due Date : </strong><field name="due_date"/>
+								</li>
+							</ul>
+						</div>
+					</t>
+				</templates>
+			</kanban>
+		</field>
+	</record>
+
+	<record id="view_school_teacher_assignment_form" model="ir.ui.view">
+		<field name="name">school.teacher.assignment.form</field>
+		<field name="model">school.teacher.assignment</field>
+		<field name="arch" type="xml">
+			<form string="Assignment Information" >
+				<header>
+					<button name="active_assignment" class="oe_stat_button fa fa-check" states="draft" string="Active Assignment" type="object" groups="base.group_system, school_management.group_school_admin, school_management.group_school_teacher"/>
+					<button name="done_assignments" states="active" string="Done" type="object" groups="base.group_system, school_management.group_school_admin, school_management.group_school_teacher"/>
+					<field name="state" widget="statusbar" readonly="1"/>
+				</header>
+				<sheet>
+					<separator string="Teacher Assignment" colspan="4"/>
+					<group col="4" colspan="4">
+						<field name="name" placeholder="Assignment Name" />
+						<field name="teacher_id" placeholder="Teacher Name"  options="{'no_open': True}"  />
+					</group>
+					<group col="4" string="Subject and Dates">
+						<group>
+							<field name="standard_id" select="1" placeholder="Class"  required="1" context="{'standard_id':standard_id}" options="{'no_open': True}" />
+							<field name="division_id" select="1" widget="many2many_tags" required="1" context="{'standard_id':standard_id}" options="{'no_open': True}"  />	
+							<field name="subject_id" select="1" context="{'standard_id':standard_id}" options="{'no_open': True}"  />
+						</group>
+						<group>
+							<field name="assign_date" placeholder="Assign Date" />
+							<field name="due_date" placeholder="Due Date" />
+						</group>
+					</group>
+					<group string="Submission Format Information" col="4">
+						<field name="submission_type" />
+					</group>
+					<separator string="Attachments" colspan="4"/>
+					<group col="2">
+						<field name="attached_homework" placeholder="Attachment File"  filename="attach_files" />
+						<field name="description" />
+					</group>
+					<notebook>
+						<page string="Student Assignment Details">
+							<field name="student_assignment_ids" readonly="1">
+								<tree>
+									<!-- <field name="stud_roll_no"/> -->
+									<field name="student_id"/>
+									<field name="state"/>
+									<button name="done_assignment" string="Mark as Done" type="object" icon="fa-check text-success" help="done assigment" states="active"/>
+									<button name="reassign_assignment" string="Reassign" type="object" icon="fa-recycle" help="Re-assign assigment" states="reject"/>
+								</tree>
+							</field>
+						</page>
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>		  
+	  
+</odoo>

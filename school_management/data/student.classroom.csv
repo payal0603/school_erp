@@ -1,0 +1,11 @@
+id,name,capacity,standard_id:id,division_id:id
+cls_1,Room 1,50,std_1,div_1
+cls_2,Room 2,50,std_2,div_1
+cls_3,Room 3,50,std_3,div_1
+cls_4,Room 4,50,std_4,div_1
+cls_5,Room 5,50,std_5,div_1
+cls_6,Room 6,50,std_6,div_1
+cls_7,Room 7,50,std_7,div_1
+cls_8,Room 8,50,std_8,div_1
+cls_9,Room 9,50,std_9,div_1
+cls_10,Room 10,50,std_10,div_1

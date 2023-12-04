@@ -1,0 +1,98 @@
+<odoo>
+	
+	<record id="action_student_marksheet_register" model="ir.actions.act_window">
+		<field name="name">Marksheet Register</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">student.marksheet.register</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+	
+	<menuitem id="menu_school_marksheet_register"
+			  name="Marksheet Register"
+			  parent="menu_school_examination_root"
+			  action="action_student_marksheet_register" 
+			  sequence="5"/>
+
+	<record id="view_student_marksheet_register_tree" model="ir.ui.view">
+		<field name="name">student.marksheet.register.tree</field>
+		<field name="model">student.marksheet.register</field>
+		<field name="arch" type="xml">
+			<tree string="Marksheet Register" sample="1" >
+				<field name="exam_session_id"/>
+				<field name="generated_date"/>
+				<field name="state"/>
+				<field name="total_pass"/>
+				<field name="total_fail"/>
+				<field name="name"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="view_student_marksheet_register_form" model="ir.ui.view">
+		<field name="name">student.marksheet.register.form</field>
+		<field name="model">student.marksheet.register</field>
+		<field name="arch" type="xml">
+			<form string="Marksheet Register">
+				<header>
+					<button class="oe_highlight" name="act_validate" type="object" string="Validate Marksheet" states="draft" groups="base.group_system, school_management.group_school_admin"/>
+					<button name="act_draft" type="object" string="Set to Draft" states="cancelled"/>
+					<button name="act_cancel" type="object" string="Cancel" states="draft" />
+					<field name="state" widget="statusbar" statusbar_visible="draft,validated,cancelled"/>
+				</header>
+				<sheet>
+					<field name="active" invisible="1"/>
+					<group>
+						<field name="name"/>
+						<field name="exam_session_id" options="{'no_open': True}" />
+						<field name="generated_date"/>
+						<field name="total_pass"/>
+						<field name="total_fail"/>
+						<field name="result_template_id"/>
+					</group>
+					<separator string="Marksheet" colspan="4"/>
+					<group colspan="4">
+						<field name="marksheet_line_ids">
+							<tree>
+								<field name="marksheet_reg_id" options="{'no_open': True}" groups="school_management.group_school_student"/>
+								<field name="student_id" />
+								<field name="total_marks" />
+								<field name="percentage" />
+								<field name="grade" />
+								<field name="status" />
+							</tree>
+						</field>
+					</group>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers"/>
+					<field name="message_ids" widget="mail_thread"/>
+				</div>
+			</form>
+		</field>
+	</record>  
+
+	<record id="view_student_marksheet_register_search" model="ir.ui.view">
+		<field name="name">student.marksheet.register.search</field>
+		<field name="model">student.marksheet.register</field>
+		<field name="arch" type="xml">
+			<search string="Marksheet Register">
+				<field name="exam_session_id"/>
+				<field name="generated_date"/>
+				<field name="state"/>
+				<field name="total_pass"/>
+				<field name="total_fail"/>
+				<field name="name"/>
+				<filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+				<newline/>
+				<group expand="0" string="Group By...">
+					<filter string="Exam Session" name="group_by_marksheet_register_exam_session" domain="[]" context="{'group_by':'exam_session_id'}" />
+					<filter string="Status" name="group_by_marksheet_register_status" domain="[]" context="{'group_by':'state'}" />
+					<filter string="Total Pass" name="group_by_marksheet_register_total_pass" domain="[]" context="{'group_by':'total_pass'}" />
+					<filter string="Total Fail" name="group_by_marksheet_register_total_fail" domain="[]" context="{'group_by':'total_fail'}" />
+					<filter string="Marksheet Register" name="group_by_marksheet_register_name" domain="[]" context="{'group_by':'name'}" />
+				</group>
+			</search>
+		</field>
+	</record>
+
+</odoo>

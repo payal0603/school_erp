@@ -1,0 +1,61 @@
+<odoo>
+	
+	
+
+	<menuitem id="menu_school_classroom_management"
+			  name="Classroom Management"
+			  parent="menu_school_configuration_root"
+			  sequence="7"/>
+
+	
+
+	<record id="view_student_classroom_tree" model="ir.ui.view">
+		<field name="name">student.classroom.tree</field>
+		<field name="model">student.classroom</field>
+		<field name="arch" type="xml">
+			<tree string="classroom" sample="1">
+				<field name="name"/>
+				<field name="capacity"/>
+				<field name="standard_id" options="{'no_open': True}" />
+				<field name="division_id" options="{'no_open': True}"  />
+			</tree>
+		</field>
+	</record>
+
+	<!-- <record id="view_student_classroom_form1" model="ir.ui.view">
+		<field name="name">student.classroom.form</field>
+		<field name="model">student.classroom</field>
+		<field name="arch" type="xml">
+			<form string="classroom">
+				<sheet>
+					<group>
+						<group>
+							<field name="name"/>
+							<field name="capacity"/>
+							<field name="standard_id" options="{'no_open': True}" />
+							<field name="division_id" context="{'standard_id':standard_id}" options="{'no_open': True}"  />
+						</group>
+					</group>
+				</sheet>
+			</form>
+			<div class="oe_chatter">
+				<field name="message_follower_ids" />
+				<field name="message_ids" />
+			</div>
+		</field>
+	</record> -->
+
+	<record id="action_student_classroom" model="ir.actions.act_window">
+		<field name="name">Classroom Detail</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">student.classroom</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="menu_school_classroom_detail"
+			  name="Classroom Details"
+			  parent="menu_school_classroom_management"
+			  action="action_student_classroom"
+			  sequence="1"/>
+
+</odoo>

@@ -1,0 +1,11 @@
+<odoo>
+	<data>
+		 <record id="marksheet_register_2" model="student.marksheet.register">
+			<field name="name">Mark Sheet for 8th Midterm</field>
+			<field name="exam_session_id" ref="exam_session_2"/>
+			<field name="generated_date" eval='(DateTime.today())'/>
+			<field name="result_template_id" ref="result_template_2"/>
+			<field name="state">validate</field>
+		</record>
+	</data>
+</odoo>

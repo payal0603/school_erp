@@ -1,0 +1,27 @@
+<odoo>
+	<data noupdate="1">
+		<record id="school_management.std_1" model="student.class">
+			<field name="fees_term_id" ref="fees_term_1"/>
+		</record>
+
+		<record id="school_management.std_2" model="student.class">
+			<field name="fees_term_id" ref="fees_term_1"/>
+		</record>
+
+		<record id="school_management.std_3" model="student.class">
+			<field name="fees_term_id" ref="fees_term_1"/>
+		</record>
+
+		<record id="school_management.std_4" model="student.class">
+			<field name="fees_term_id" ref="fees_term_2"/>
+		</record>
+
+		<record id="school_management.std_5" model="student.class">
+			<field name="fees_term_id" ref="fees_term_3"/>
+		</record>
+
+		<record id="school_management.std_6" model="student.class">
+			<field name="fees_term_id" ref="fees_term_3"/>
+		</record>
+	</data>
+</odoo>

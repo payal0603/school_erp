@@ -1,0 +1,128 @@
+<odoo>
+
+	<menuitem id="menu_student_attendence_root"
+			  name="Attendence"
+			  parent="menu_student_student_root"
+			  sequence="2"/>
+	
+	<record id="action_student_attendence_sheet" model="ir.actions.act_window">
+		<field name="name">Attendence Sheet</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">student.attendence.sheet</field>
+		<field name="view_mode">tree,pivot,graph,form</field>
+	</record>
+
+	<menuitem id="menu_student_attendence_sheet"
+			  name="Attendence Sheet"
+			  parent="menu_student_attendence_root"
+			  action="action_student_attendence_sheet"
+			  sequence="2"/>
+
+	<record id="view_student_attendence_sheet_tree" model="ir.ui.view">
+		<field name="name">student.attendence.sheet.tree</field>
+		<field name="model">student.attendence.sheet</field>
+		<field name="priority" eval="8"/>
+		<field name="arch" type="xml">
+			<tree string="Attendence Sheet" sample="1" > 
+				<field name="register_id"/>
+				<!-- <field name="name"/> -->
+				<field name="attendence_date"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="view_student_attendence_sheet_form" model="ir.ui.view">
+		<field name="name">student.attendence.sheet.form</field>
+		<field name="model">student.attendence.sheet</field>
+		<field name="priority" eval="8"/>
+		<field name="arch" type="xml">
+			<form string="Attendence Sheet">
+				<header>
+					<button type="object" name="attendence_start" states="draft" string="Attendence Start" class="oe_highlight"/>
+					<button type="object" name="attendence_done" states="start" string="Attendence Taken" class="oe_highlight"/>
+					<button type="object" name="attendence_draft" states="cancel" string="Draft" class="oe_highlight"/>
+					<button type="object" name="attendence_cancel" states="draft,start" string="Cancel"/>
+					<field name="state" widget="statusbar" statusbar_visible="draft,start,done"/>
+				</header>
+				<sheet>
+					<field name="active" invisible="1"/>
+					<widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+							attrs="{'invisible': [('active', '=', True)]}"/>
+					<div name="button_box" class="oe_button_box">
+					</div>
+					<group col="4">
+						<field name="register_id"/>
+						<!-- <field name="name"/> -->
+						<field name="attendence_date"/>
+						<field name="standard_id" invisible="1" options="{'no_open': True}" />
+						<field name="division_id" invisible="1" context="{'standard_id':standard_id}" options="{'no_open': True}"  />
+					</group>
+					<group col="4" string="Students">
+						<field name="attendence_line" colspan="4" nolabel="1">
+							<tree string="Attendence Line" editable="tstudent">
+								<field name="student_id"/>
+								<field name="present"/>
+								<field name="late"/>
+								<field name="absent"/>
+							</tree>
+						</field>
+					</group>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers" />
+					<field name="message_ids" widget="mail_thread"/>
+				</div>
+			</form>
+		</field>
+	</record>
+
+	<record id="view_student_attendence_sheet_search" model="ir.ui.view">
+		<field name="name">student.attendence.sheet.search</field>
+		<field name="model">student.attendence.sheet</field>
+		<field name="priority" eval="8"/>
+		<field name="arch" type="xml">
+			<search string="Attendence Sheet">
+				<field name="register_id"/>
+				<field name="attendence_date"/>
+				<newline/>
+				<filter string="Today" name="filter_attendence_today"
+						domain="[('attendence_date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+				<filter string=" Week" name="filter_attendence_week"
+						domain="[('attendence_date', '&gt;=', (context_today()+relativedelta(weeks=-1,days=1,weekday=0)).strftime('%Y-%m-%d')),
+				('attendence_date', '&lt;=', (context_today()-relativedelta(weekday=6)).strftime('%Y-%m-%d'))]"/>
+				<filter string="Month" name="filter_attendence_month"
+						domain="[('attendence_date', '&lt;=', (context_today()+relativedelta(day=31)).strftime('%Y-%m-%d')),
+								('attendence_date', '&gt;=', (context_today()-relativedelta(day=1)).strftime('%Y-%m-%d'))]"/>
+				<filter string="Archived" name="inactive"
+						domain="[('active', '=', False)]"/>
+				<group expand="0" string="Group By...">
+					<filter string="Register" name="group_by_attendence_sheet_register_id" domain="[]" context="{'group_by':'register_id'}"/>
+					<filter string="Date" name="group_by_attendence_sheet_attendence_date" domain="[]" context="{'group_by':'attendence_date'}"/>
+				</group>
+			</search>
+		</field>
+	</record>
+
+	<record id="view_student_attendence_sheet_pivot" model="ir.ui.view">
+		<field name="name">student.attendence.sheet.pivot</field>
+		<field name="model">student.attendence.sheet</field>
+		<field name="priority" eval="8"/>
+		<field name="arch" type="xml">
+			<pivot string="Attendence Sheet">
+				<field name="name" type="row"/>
+				<field name="register_id" type="col"/>
+			</pivot>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="view_student_attendence_sheet_graph">
+		<field name="name">student.attendence.sheet.graph</field>
+		<field name="model">student.attendence.sheet</field>
+		<field name="arch" type="xml">
+			<graph string="Attendence Sheet" type="pie">
+				<field name="register_id"/>
+			</graph>
+		</field>
+	</record>
+
+</odoo>

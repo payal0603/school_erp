@@ -1,0 +1,72 @@
+<odoo>
+
+	<record id="action_student_result_template" model="ir.actions.act_window">
+		<field name="name">Result Template</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">student.result.template</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+	
+	<menuitem id="menu_school_result_template"
+			  name="Result Template"
+			  parent="menu_school_examination_root"
+			  action="action_student_result_template" 
+			  sequence="4"/>
+
+	<record id="view_student_result_template_tree" model="ir.ui.view">
+		<field name="name">student.result.template.tree</field>
+		<field name="model">student.result.template</field>
+		<field name="arch" type="xml">
+			<tree string="Result Template" sample="1">
+				<field name="name"/>
+				<field name="exam_session_id"/>
+				<field name="result_date"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="view_student_result_template_form" model="ir.ui.view">
+		<field name="name">student.result.template.form</field>
+		<field name="model">student.result.template</field>
+		<field name="arch" type="xml">
+			<form string="Result Template">
+				<header>
+					<button class="oe_highlight" name="generate_result" type="object" string="Generate Result" states="draft" groups="school_management.group_school_admin, base.group_system"/>
+					<field name="state" widget="statusbar" statusbar_visible="draft,result_generated"/>
+				</header>
+				<sheet>
+					<field name="active" invisible="1"/>
+					<group>
+						<group>
+							<field name="name" select="1"/>
+							<field name="result_date"/>
+							<field name="exam_session_id"/>
+							<field name="evaluation_type" invisible="1"/>
+						</group>
+					</group>
+					<separator string="Grades" attrs="{'invisible':[('evaluation_type','!=','grade')]}"/>
+					<field name="grade_ids" nolabel="1" attrs="{'invisible':[('evaluation_type','!=','grade')],'required':[('evaluation_type','=','grade')]}"/>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers"/>
+					<field name="message_ids" widget="mail_thread"/>
+				</div>
+			</form>
+		</field>
+	</record>
+
+	<record id="view_student_result_template_search" model="ir.ui.view">
+		<field name="name">student.result.template.search</field>
+		<field name="model">student.result.template</field>
+		<field name="arch" type="xml">
+			<search string="Result Template">
+				<field name="name" select="True"/>
+				<field name="exam_session_id"/>
+				<field name="result_date" select="True"/>
+				<filter string="Archived" name="inactive"
+						domain="[('active', '=', False)]"/>
+			</search>
+		</field>
+	</record>
+
+</odoo>

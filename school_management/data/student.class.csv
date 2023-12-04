@@ -1,0 +1,13 @@
+id,name,code,subject_ids:id,division_id:id,department_id:id
+std_1,1,STD-01,"sub_1,sub_5,sub_8,sub_10","div_1,div_2,div_3",dept_2
+std_2,2,STD-02,"sub_1,sub_4,sub_5,sub_8,sub_10","div_1,div_2,div_3",dept_2
+std_3,3,STD-03,"sub_1,sub_4,sub_5,sub_8,sub_10","div_1,div_2,div_3",dept_2
+std_4,4,STD-04,"sub_1,sub_4,sub_5,sub_8,sub_10","div_1,div_2,div_3",dept_2
+std_5,5,STD-05,"sub_1,sub_2,sub_4,sub_5,sub_6,sub_8,sub_9","div_1,div_2,div_3,div_4",dept_2
+std_6,6,STD-06,"sub_1,sub_2,sub_4,sub_5,sub_6,sub_8,sub_9","div_1,div_2,div_3,div_4",dept_2
+std_7,7,STD-07,"sub_1,sub_2,sub_4,sub_5,sub_6,sub_8,sub_9","div_1,div_2,div_3,div_4",dept_2
+std_8,8,STD-08,"sub_1,sub_2,sub_3,sub_4,sub_5,sub_6,sub_8,sub_9","div_1,div_2,div_3,div_4",dept_2
+std_9,9,STD-09,"sub_1,sub_2,sub_3,sub_4,sub_5,sub_6,sub_7,sub_9","div_1,div_2",dept_2
+std_10,10,STD-10,"sub_1,sub_2,sub_3,sub_4,sub_5,sub_6,sub_7,sub_9","div_1,div_2",dept_2
+std_11,11 Science – A,STD-11,"sub_1,sub_4,sub_9,sub_12,sub_13","div_1,div_2",dept_2
+std_12,12 Science – A,STD-12,"sub_1,sub_4,sub_9,sub_12,sub_13","div_1,div_2",dept_2

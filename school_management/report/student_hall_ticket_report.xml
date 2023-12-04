@@ -1,0 +1,117 @@
+<odoo>
+	<data>
+		<template id="student_hall_ticket_report">
+			<style>
+				.font{
+				<!-- font-size:14px; -->
+				font-family:"Helvetica"
+				}
+				@page{
+				margin-top:1%;
+				size: A4;
+				}
+			</style>
+			<t t-call="web.html_container">
+				<t t-set="layout" t-value="user.company_id.external_report_layout_id"/>
+				<t t-call="web.external_layout">
+					<div class="page">
+						<br/>
+						<br/>
+						<br/>
+						<div class="oe_structure"></div>
+						<t t-foreach="docs" t-as="o">
+							<t t-foreach="get_data" t-as="rec">
+							<div class="font">
+								<div class="page">
+									<br></br>
+									<br></br>
+									<br></br>
+									<div class="text-center" style="font-size:25px;">
+										<h3>
+											<b>Hall Ticket</b>
+										</h3>
+										<strong>Exam : </strong> 
+										<span t-out="rec['exam'] if rec['exam'] else ''"/>
+										<!-- <strong>Code : </strong>
+										<span t-out="rec['code'] if rec['code'] else ''"/> -->
+									</div>
+									<br></br>
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td width="90%">
+													<table class="table table-unbordered">
+														<tbody>
+															<tr>
+																<td style="padding-left: 5px;font-size:16px; margin:2px;">
+																	<b>Student Name : </b>
+																	<span t-esc="rec['student']"/>
+																</td>
+															</tr>
+															<tr>
+																<td style="padding-left: 5px;font-size:16px; margin:2px;">
+																	<b>Standard : </b>
+																	<span t-out="rec['standard']  if  rec['standard']  else ''"/>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+												<td width="10%">
+													<img t-att-src="image_data_uri(rec['image'])" style="			min-width:3.0cm;max-width:3.0cm;max-height:3.5cm;min-height:3.0cm; margin:5px;"/>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<br></br>
+									<br></br>
+									<table class="table table-bordered">
+										<thead class="text-center"
+											   style="background-color:#eeeeee; font-size:18px; font-weight:600;">
+											<th class="text-center">Subject</th>
+											<th class="text-center">Date</th>
+											<th class="text-center">Time</th>
+											<th class="text-center">Supervisor Sign</th>
+										</thead>
+										<tbody style="font-size:16px;">
+											<tr t-foreach="rec['line']" t-as='s'>
+												<td class="text-right">
+													<span t-out="s['subject'] if  s['subject']  else ''"/>
+												</td>
+												<td class="text-center" >
+													<span t-out="s['date'] if  s['date'] else ''" t-options="{'widget':'date'}"/>
+												</td>
+												<td class="text-center" >
+													<span t-esc="s['time']"/>
+												</td>
+												<td class="text-center" >
+													<span t-out="s['sup_sign']  if  s['sup_sign']  else ''"/>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<p style="page-break-after:always"></p>
+							</t>
+						</t>
+					</div>
+				</t>
+			</t>
+		</template>
+		<!-- <template id="student_hall_ticket_report">
+			<t t-call="web.html_container">
+				<t t-call="web.external_layout">
+					<div class="page">
+						<div class="oe_structure"></div>
+						<t t-foreach="docs" t-as="o">
+							<t t-esc="o"></t>
+							<p>Hetal
+							</p>
+						</t>
+					</div>
+				</t>
+			</t>
+		</template> -->
+	</data>
+</odoo>

@@ -1,0 +1,66 @@
+<odoo>
+	
+	<menuitem id="menu_school_configuration_root"
+			  name="Configuration"
+			  parent="menu_school_mgmnt_root"
+			  sequence="7"/>
+
+	<record id="action_student_class" model="ir.actions.act_window">
+		<field name="name">Standard Management</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">student.class</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="menu_school_standard_management"
+			  name="Standard Management"
+			  parent="menu_school_configuration_root"
+			  sequence="5"/>
+
+	<menuitem id="menu_school_class_detail"
+			  name="Standard Details"
+			  parent="menu_school_standard_management"
+			  action="action_student_class" 
+			  sequence="1"/>
+
+	<record id="view_student_class_tree" model="ir.ui.view">
+		<field name="name">student.class.tree</field>
+		<field name="model">student.class</field>
+		<field name="arch" type="xml">
+			<tree string="Standard" sample="1">
+				<field name="name"/>
+				<field name="division_id" widget="many2many_tags"/>
+				<field name="subject_ids" widget="many2many_tags"/>
+				<field name="department_id" />
+			</tree>
+		</field>
+	</record>
+
+	<record id="view_student_class_form" model="ir.ui.view">
+		<field name="name">student.class.form</field>
+		<field name="model">student.class</field>
+		<field name="arch" type="xml">
+			<form string="Standard">
+				<header/>
+				<sheet>
+					<group>
+						<group class="Standard Detail">
+							<field name="name" />
+							<field name="code" />
+							<field name="division_id" widget="many2many_tags"/>
+							<field name="department_id" options="{'no_open': True}" />
+						</group>
+						<group string="Subjects" colspan="4">
+							<field name="subject_ids" options="{'no_open': True}"/>
+						</group>
+					</group>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" />
+					<field name="message_ids" />
+				</div>
+			</form>
+		</field>
+	</record>
+
+</odoo>

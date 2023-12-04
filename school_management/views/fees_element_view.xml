@@ -1,0 +1,58 @@
+<odoo>
+	
+	<record id="action_student_fees_element" model="ir.actions.act_window">
+		<field name="name">Fees Element</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">student.fees.element</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<!-- <menuitem id="menu_student_fees_element"
+			  name="Fee Element Details"
+			  parent="menu_school_standard_management"
+			  action="action_student_fees_element" 
+			  sequence="4"/>
+ -->
+	<record id="student_fees_element_tree_1" model="ir.ui.view">
+        <field name="name">student.fees.element.tree</field>
+        <field name="model">student.fees.element</field>
+        <field name="arch" type="xml">
+            <tree string="Fees Elements" editable="top" sample="1">
+                <field name="product_id" string="Standard"/>
+                <field name="value"/>
+                <field name="department_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="student_fees_element_form_1" model="ir.ui.view">
+        <field name="name">student.fees.element.form</field>
+        <field name="model">student.fees.element</field>
+        <field name="arch" type="xml">
+            <form string="Fees Elements">
+                <sheet>
+                    <group>
+                        <field name="product_id" string="Standard"/>
+                        <field name="value"/>
+                        <field name="sequence"/>
+                        <field name="department_id" options="{'no_open': True}" />
+                        <field name="fees_terms_line_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>	
+
+    <record id="student_fees_element_search_1" model="ir.ui.view">
+        <field name="name">student.fees.element.search</field>
+        <field name="model">student.fees.element</field>
+        <field name="arch" type="xml">
+            <search string="Fees Element">
+                <field name="product_id" select="True"/>
+                <field name="department_id" select="True"/>
+                <filter string="Standard" name="product_id" context="{'group_by':'product_id'}"/>
+            </search>
+        </field>
+    </record>	  
+
+</odoo>

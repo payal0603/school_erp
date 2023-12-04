@@ -1,0 +1,80 @@
+<odoo>
+
+	<menuitem id="menu_student_parent_root"
+			  name="Parent"
+			  parent="menu_school_mgmnt_root"
+			  sequence="4"/>
+	
+	<record id="action_student_parent" model="ir.actions.act_window">
+		<field name="name">Parent</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">student.parent</field>
+		<field name="view_mode">tree,kanban,form</field>
+	</record>
+
+	<menuitem id="menu_student_parent"
+			  name="Parent"
+			  parent="menu_student_parent_root"
+			  action="action_student_parent"
+			  sequence="2"/>
+
+	<record id="view_student_parent_tree" model="ir.ui.view">
+		<field name="name">student.parent.tree</field>
+		<field name="model">student.parent</field>
+		<field name= "arch" type = "xml">
+			<tree string="Parent Information" sample="1" >
+				<field name="name"/>
+				<field name="gender" />
+				<field name="phone"/>
+				<field name="email"/>
+				<field name="student_ids" widget="many2many_tags" />
+			</tree>
+		</field>
+	</record>
+
+	<record id="view_student_parent_form" model="ir.ui.view">
+		<field name="name">student.parent.form</field>
+		<field name="model">student.parent</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<div>
+						<field name="image" widget="image" class="oe_avatar"/>
+					</div>
+					<group>
+						<field name="name"/>
+						<field name="gender" widget="selection_badge" />
+						<field name="relation"/>
+						<field name="phone" />
+						<field name="email" widget="email" /> 
+					</group>
+					<field name="student_ids" />
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids"/>
+					<field name="activity_ids"/>
+					<field name="message_ids"/>
+				</div>
+			</form>
+		</field>
+	</record>
+
+	<record id="view_student_parent_search" model="ir.ui.view">
+		<field name="name">student.parent.search</field>
+		<field name="model">student.parent</field>
+		<field name= "arch" type = "xml">
+		  <search string="Parent">
+			<field name="name"/>
+			<field name="student_ids" />
+			<separator/>
+			<filter string="Male" name="male" domain="[('gender','=','male')]"/>
+			<filter string="Female" name="female" domain="[('gender','=','female')]"/>
+			<group expand="1" string="Group By">
+				<filter string="Name" name="name" context="{'group_by':'name'}"/>
+				<filter string="Student ID" name="student_ids" context="{'group_by':'student_ids'}"/>
+			</group>
+		  </search>
+		</field>
+	</record>
+
+</odoo>

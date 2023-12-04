@@ -1,0 +1,85 @@
+<odoo>
+	
+	<record id="action_student_attendence_register" model="ir.actions.act_window">
+		<field name="name">Attendence Register</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">student.attendence.register</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="menu_student_attendence_register"
+			  name="Attendence Register"
+			  parent="menu_student_attendence_root"
+			  action="action_student_attendence_register"
+			  sequence="1"/>
+	
+	<record id="view_student_attendence_register_tree" model="ir.ui.view">
+		<field name="name">student.attendence.register.tree</field>
+		<field name="model">student.attendence.register</field>
+		<field name="priority" eval="8"/>
+		<field name="arch" type="xml">
+			<tree string="Attendence Register" sample="1" >
+				<field name="name"/>
+				<field name="code"/>
+				<field name="standard_id"/>
+				<field name="division_id"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="view_student_attendence_register_form" model="ir.ui.view">
+		<field name="name">student.attendence.register.form</field>
+		<field name="model">student.attendence.register</field>
+		<field name="priority" eval="8"/>
+		<field name="arch" type="xml">
+			<form string="Attendence Register">
+				<header/>
+				<sheet>
+					<field name="active" invisible="1"/>
+					<widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+							attrs="{'invisible': [('active', '=', True)]}"/>
+					<group>
+						<group col="4" colspan="4">
+							<field name="name"/>
+							<field name="code"/>
+							<field name="standard_id" options="{'no_open': True}" />
+							<field name="division_id" context="{'standard_id': standard_id,'get_parent_batch':1}" options="{'no_open': True}" />
+						</group>
+					</group>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers"/>
+					<field name="message_ids" widget="mail_thread"/>
+				</div>
+			</form>
+		</field>
+	</record>
+
+	<record id="view_student_attendence_register_search" model="ir.ui.view">
+		<field name="name">student.attendence.register.search</field>
+		<field name="model">student.attendence.register</field>
+		<field name="priority" eval="8"/>
+		<field name="arch" type="xml">
+			<search string="Attendence Register">
+				<field name="name"/>
+				<field name="code"/>
+				<field name="standard_id"/>
+				<field name="division_id" context="{'standard_id' : standard_id}"/>
+				<filter string="Archived" name="inactive"
+						domain="[('active', '=', False)]"/>
+				<newline/>
+				<group expand="0" string="Group By...">
+					<filter string="Name" name="group_by_attendence_register_name"
+							domain="[]" context="{'group_by':'name'}"/>
+					<filter string="Code" name="group_by_attendence_register_code"
+							domain="[]" context="{'group_by':'code'}"/>
+					<filter string="Course" name="group_by_attendence_register_course"
+							domain="[]" context="{'group_by':'standard_id'}"/>
+					<filter string="Batch" name="group_by_attendence_register_batch"
+							domain="[]" context="{'group_by':'division_id'}"/>
+				</group>
+			</search>
+		</field>
+	</record>			  
+
+</odoo>

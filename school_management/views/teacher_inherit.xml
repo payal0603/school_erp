@@ -1,0 +1,20 @@
+<odoo>
+	<data>
+		<record id="view_student_teacher_form_session_inherit" model="ir.ui.view">
+			<field name="name">student.teacher.form.session.inherit</field>
+			<field name="model">student.teacher</field>
+			<field name="inherit_id" ref="school_management.view_student_teacher_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='experience']" position="inside">
+					<button class="btn oe_stat_button"
+							type="object"
+							name="count_sessions_details"
+							style="border-right: 1px solid;"
+							icon="fa-file">
+						<!-- <field string="Sessions" name="session_count" widget="statinfo"/> -->
+					</button>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>

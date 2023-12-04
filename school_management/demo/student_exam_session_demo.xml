@@ -1,0 +1,31 @@
+<odoo>
+	<data noupdate="1">
+		<record id="exam_session_1" model="student.exam.session">
+			<field name="name">Standard 1st Annual</field>
+			<field name="code">STD-01-AN</field>
+			<field name="start_date" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-10 %H:%M')"/>
+			<field name="end_date" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-14 %H:%M')"/>
+			<field name="standard_id" ref="std_1"></field>
+			<field name="exam_type">annual</field>
+			<field name="evaluation_type">normal</field>
+		</record>
+		<record id="exam_session_2" model="student.exam.session">
+			<field name="name">Standard 8th Annual</field>
+			<field name="code">STD-08-AN</field>
+			<field name="start_date" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-11 %H:%M')"/>
+			<field name="end_date" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-20 %H:%M')"/>
+			<field name="standard_id" ref="std_8"></field>
+			<field name="exam_type">annual</field>
+			<field name="evaluation_type">normal</field>
+		</record>
+		<record id="exam_session_3" model="student.exam.session">
+			<field name="name">Standard 9thst Midterm</field>
+			<field name="code">STD-09-MID</field>
+			<field name="start_date" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-20 %H:%M')"/>
+			<field name="end_date" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-30 %H:%M')"/>
+			<field name="standard_id" ref="std_9"></field>
+			<field name="exam_type">midterm</field>
+			<field name="evaluation_type">grade</field>
+		</record>
+	</data>
+</odoo>

@@ -1,0 +1,105 @@
+<odoo>
+	
+	<menuitem id="menu_school_examination_root"
+			  name="Examination"
+			  parent="menu_school_mgmnt_root"
+			  sequence="6"/>
+
+	<record id="action_student_exam_session" model="ir.actions.act_window">
+		<field name="name">Exam Sesssion Details</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">student.exam.session</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="menu_school_exam_detail"
+			  name="Exam Session Details"
+			  parent="menu_school_examination_root"
+			  action="action_student_exam_session" 
+			  sequence="1"/>
+
+	<record id="view_student_exam_session_tree" model="ir.ui.view">
+		<field name="name">student.exam.session.tree</field>
+		<field name="model">student.exam.session</field>
+		<field name="arch" type="xml">
+			<tree string="Exam Session" sample="1" >
+				<field name="name"/>
+				<field name="code"/>
+				<field name="start_date"/>
+				<field name="end_date"/>
+				<field name="standard_id" optional="show" options="{'no_open': True}" />
+				<field name="exam_type" optional="show"/>
+				<field name="evaluation_type" optional="show"/>
+				<field name="state"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="view_student_exam_session_form" model="ir.ui.view">
+		<field name="name">student.exam.session.form</field>
+		<field name="model">student.exam.session</field>
+		<field name="arch" type="xml">
+			<form string="Exam Session">
+				<header>
+					<button name="act_draft" states="held,schedule,cancel" type="object" string="Draft" class="oe_highlight" groups="school_management.group_school_admin, base.group_system"/>
+					<button name="act_schedule" states="draft" type="object" string="Schedule" class="oe_highlight" groups="school_management.group_school_admin, base.group_system"/>
+					<button name="act_held" states="schedule" type="object" string="Held" class="oe_highlight" groups="school_management.group_school_admin, base.group_system"/>
+					<button name="act_done" states="schedule,held" type="object" string="Done" class="oe_highlight" groups="school_management.group_school_admin, base.group_system"/>
+					<button name="act_cancel" states="schedule,held" type="object" string="Cancel" groups="school_management.group_school_admin, base.group_system"/>
+					<field name="state" widget="statusbar" statusbar_visible="draft,held,scheduled,done"/>
+				</header>
+				<sheet>
+					<field name="active" invisible="1"/>
+					<widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+							attrs="{'invisible': [('active', '=', True)]}"/>
+					<group col="4" colspan="4">
+						<field name="name" select="1"/>
+						<field name="code"/>
+						<field name="start_date"/>
+						<field name="end_date"/>
+						<field name="standard_id" options="{'no_open': True}" />
+						<field name="exam_type"/>
+						<field name="evaluation_type"/>
+					</group>
+					<notebook colspan="4">
+					<page string="Exam Timetable">
+						<field name="exam_ids" colspan="4" readonly="1" nolabel="1">
+							<tree string="Exam">
+								<field name="name"/>
+								<field name="subject_id" options="{'no_open': True}" />
+								<field name="code"/>
+								<field name="start_time"/>
+								<field name="end_time"/>
+								<field name="state"/>
+								<field name="total_marks"/>
+								<field name="min_marks"/>
+							</tree>
+						</field>
+					</page>
+					</notebook>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers"/>
+					<field name="message_ids" widget="mail_thread"/>
+				</div>
+			</form>
+		</field>
+	</record>
+
+	<record id="view_student_exam_session_search" model="ir.ui.view">
+		<field name="name">student.exam.session.search</field>
+		<field name="model">student.exam.session</field>
+		<field name="arch" type="xml">
+			<search string="Exam Session">
+				<field name="name" select="True"/>
+				<field name="code" select="True"/>
+				<field name="start_date" select="True"/>
+				<field name="end_date" select="True"/>
+				<field name="standard_id" select="True"/>
+				<filter string="Archived" name="inactive"
+						domain="[]"/>
+			</search>
+		</field>
+	</record>
+
+</odoo>

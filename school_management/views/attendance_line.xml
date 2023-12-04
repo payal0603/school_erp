@@ -1,0 +1,132 @@
+<odoo>
+
+	<menuitem id="menu_student_attendence_root"
+			  name="Attendence"
+			  parent="menu_student_student_root"
+			  sequence="2"/>
+
+	<record id="action_student_attendence_line" model="ir.actions.act_window">
+		<field name="name">Attendence Line</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">student.attendence.line</field>
+		<field name="view_mode">tree,pivot,graph,form</field>
+	</record>
+
+	<menuitem id="menu_student_attendence_line"
+			  name="Attendence Line"
+			  parent="menu_student_attendence_root"
+			  action="action_student_attendence_line"
+			  sequence="3"/>
+
+	<record id="view_student_attendence_line_tree" model="ir.ui.view">
+		<field name="name">student.attendence.line.tree</field>
+		<field name="model">student.attendence.line</field>
+		<field name="priority" eval="8"/>
+		<field name="arch" type="xml">
+			<tree string="Attendence Line" sample="1" >
+				<field name="attendence_id" optional="show"/>
+				<field name="student_id"/>
+				<field name="present"/>
+				<field name="absent"/>
+				<field name="late"/>
+				<field name="attendence_date"/>
+				<field name="standard_id" optional="show"/>
+				<field name="division_id" optional="show"/>
+				<field name="remark" optional="show"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="view_student_attendence_line_form" model="ir.ui.view">
+		<field name="name">student.attendence.line.form</field>
+		<field name="model">student.attendence.line</field>
+		<field name="priority" eval="8"/>
+		<field name="arch" type="xml">
+			<form string="Attendence Line">
+				<header/>
+				<sheet>
+					<field name="active" invisible="1"/>
+					<widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+							attrs="{'invisible': [('active', '=', True)]}"/>
+					<group col="4" colspan="4">
+						<field name="attendence_id" widget="selection"/>
+						<field name="student_id" />
+						<field name="present"/>
+						<field name="absent"/>
+						<field name="late"/>
+						<field name="remark"/>
+						<field name="standard_id" widget="selection" options="{'no_open': True}" />
+						<field name="division_id" widget="selection" context="{'standard_id' : standard_id}" options="{'no_open': True}" />
+						<field name="attendence_date"/>
+					</group>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers" />
+					<field name="message_ids" widget="mail_thread"/>
+				</div>
+			</form>
+		</field>
+	</record>
+
+	<record id="view_student_attendence_line_search" model="ir.ui.view">
+		<field name="name">student.attendence.line.search</field>
+		<field name="model">student.attendence.line</field>
+		<field name="priority" eval="8"/>
+		<field name="arch" type="xml">
+			<search string="Attendence Line">
+				<field name="attendence_id"/>
+				<field name="student_id"/>
+				<field name="present"/>
+				<filter string="Present" name="group_by_attendence_present"
+						domain="[('present', '=', True)]"/>
+				<filter string="Absent" name="group_by_attendence_absent"
+						domain="[('present', '=', False)]"/>
+				<filter string="Today" name="group_by_attendence_today"
+						domain="[('attendence_date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+				<filter string="Archived" name="inactive"
+						domain="[('active', '=', False)]"/>
+				<group expand="0" string="Group By...">
+					<filter string="Attendence" name="group_by_attendence" domain="[]" context="{'group_by':'attendence_id'}"/>
+					<filter string="Standard" name="group_by_attendence_course" domain="[]" context="{'group_by':'standard_id'}"/>
+					<filter string="Division" name="group_by_attendence_batch" domain="[]" context="{'group_by':'division_id'}"/>
+					<filter string="Student" name="group_by_attendence_student" domain="[]" context="{'group_by':'student_id'}"/>
+					<filter string="Present ?" name="group_by_attendence_present" domain="[]" context="{'group_by':'present'}"/>
+					<filter string="Date" name="group_by_attendence_date" domain="[]" context="{'group_by':'attendence_date'}"/>
+				</group>
+			</search>
+		</field>
+	</record>
+
+	<record id="view_student_attendence_line_pivot" model="ir.ui.view">
+		<field name="name">student.attendence.line.pivot</field>
+		<field name="model">student.attendence.line</field>
+		<field name="priority" eval="8"/>
+		<field name="arch" type="xml">
+			<pivot string="Attendence Analysis">
+				<field name="attendence_id" type="row"/>
+				<field name="student_id"/>
+				<field name="present"/>
+				<field name="standard_id"/>
+				<field name="division_id" context="{'standard_id' : standard_id}"/>
+				<field name="attendence_date"/>
+				<field name="register_id" type="col"/>
+			</pivot>
+		</field>
+	</record>
+
+	<!-- <record model="ir.ui.view" id="view_student_attendence_line_graph">
+		<field name="name">student.attendence.line.graph</field>
+		<field name="model">student.attendence.line</field>
+		<field name="arch" type="xml">
+			<graph string="Attendence Line" type="pie">
+				<field name="student_id"/>
+			</graph>
+			<graph string="Attendence Line" type="bar">
+				<field name="attendence_date" />
+				<field name="present" />
+				<field name="absent" />
+			</graph>
+		</field>
+	</record> -->	
+
+</odoo>

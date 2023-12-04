@@ -1,0 +1,14 @@
+<odoo>
+	
+	<record id="view_student_class_form_pt_inherit" model="ir.ui.view">
+		<field name="name">student.class.form.pt.inherit</field>
+		<field name="model">student.class</field>
+		<field name="inherit_id" ref="school_management.view_student_class_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='subject_ids']" position="after">
+				<field name="fees_term_id" required="0"/>
+			</xpath>
+		</field>
+	</record>
+
+</odoo>

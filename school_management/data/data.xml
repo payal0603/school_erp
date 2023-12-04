@@ -1,0 +1,38 @@
+<odoo>
+	
+	<data>
+		<!-- sequence for student -->
+		<record id="seq_school_student" model="ir.sequence">
+			<field name="name">Student's G.R. No.</field>
+			<field name="code">student.admission</field>
+			<field name="prefix">S</field>
+			<field name="padding">6</field>
+			<field name="company_id" eval="False"/>
+		</record>
+		<!-- sequence for student -->
+		<record id="seq_student_student" model="ir.sequence">
+			<field name="name">Student's G.R. No.</field>
+			<field name="code">student.student</field>
+			<field name="prefix">S</field>
+			<field name="padding">6</field>
+			<field name="company_id" eval="False"/>
+		</record>
+		<!-- sequence for Teacher -->
+		<record id="seq_school_student" model="ir.sequence">
+			<field name="name">Employee ID</field>
+			<field name="code">student.teacher</field>
+			<field name="prefix">E</field>
+			<field name="padding">4</field>
+			<field name="company_id" eval="False"/>
+		</record>
+		<!-- sequence for Attendence -->
+		<record id="seq_school_student_attendence" model="ir.sequence">
+            <field name="name">Sequence For Attendance Sheet</field>
+            <field name="code">student.attendance.sheet</field>
+            <field name="padding">2</field>
+            <field name="prefix">AR-AS</field>
+            <field name="company_id" eval="False"/>
+        </record>
+	</data>
+
+</odoo>

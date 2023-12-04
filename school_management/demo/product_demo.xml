@@ -1,0 +1,75 @@
+<odoo>
+	<data noupdate="1">
+		<record id="product_1" model="product.product">
+			<field name="name">Admission Fees for Standard 1</field>
+			<field name="type">service</field>
+			<field name="default_code">Admission Fees for Standard 1</field>
+			<field name="categ_id" ref="prod_cat1"/>
+			<field name="uom_id" ref="uom.product_uom_unit"/>
+			<field name="uom_po_id" ref="uom.product_uom_unit"/>
+			<field name="lst_price">1000</field>
+		</record>
+
+		<record id="product_2" model="product.product">
+			<field name="name">Admission Fees for Standard 8</field>
+			<field name="type">service</field>
+			<field name="default_code">Admission Fees for Standard 8</field>
+			<field name="categ_id" ref="prod_cat1"/>
+			<field name="uom_id" ref="uom.product_uom_unit"/>
+			<field name="uom_po_id" ref="uom.product_uom_unit"/>
+			<field name="lst_price">2000</field>
+		</record>
+
+		<record id="product_3" model="product.product">
+			<field name="name">Admission Fees for Standard 11 Science</field>
+			<field name="type">service</field>
+			<field name="default_code">Admission Fees for Standard 12 Science</field>
+			<field name="categ_id" ref="prod_cat1"/>
+			<field name="uom_id" ref="uom.product_uom_unit"/>
+			<field name="uom_po_id" ref="uom.product_uom_unit"/>
+			<field name="lst_price">5000</field>
+		</record>
+
+		<record id="product_4" model="product.product">
+			<field name="name">Admission Fees for Standard 12 Science</field>
+			<field name="type">service</field>
+			<field name="default_code">Admission Fees for Standard 12 Science</field>
+			<field name="categ_id" ref="prod_cat1"/>
+			<field name="uom_id" ref="uom.product_uom_unit"/>
+			<field name="uom_po_id" ref="uom.product_uom_unit"/>
+			<field name="lst_price">7000</field>
+		</record>
+
+		<record id="product_5" model="product.product">
+			<field name="name">Tution Fees for Standard 11 Scince</field>
+			<field name="type">service</field>
+			<field name="default_code">Tution Fees for STD-11</field>
+			<field name="categ_id" ref="prod_cat1"/>
+			<field name="uom_id" ref="uom.product_uom_unit"/>
+			<field name="uom_po_id" ref="uom.product_uom_unit"/>
+			<field name="lst_price">30000</field>
+		</record>
+
+		<record id="product_6" model="product.product">
+			<field name="name">Admission Fees for Standard 4</field>
+			<field name="type">service</field>
+			<field name="default_code">Admission Fees for STD-4</field>
+			<field name="categ_id" ref="prod_cat1"/>
+			<field name="uom_id" ref="uom.product_uom_unit"/>
+			<field name="uom_po_id" ref="uom.product_uom_unit"/>
+			<field name="lst_price">2500</field>
+		</record>
+
+		<record id="product_7" model="product.product">
+			<field name="name">Library Fees</field>
+		</record>
+
+		<record id="product_8" model="product.product">
+			<field name="name">Tution Fees</field>
+		</record>
+
+		<record id="product_9" model="product.product">
+			<field name="name">Transportation Fees</field>
+		</record>
+	</data>
+</odoo>

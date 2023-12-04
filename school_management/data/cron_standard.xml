@@ -1,0 +1,13 @@
+<odoo>
+	<data>
+		<record id="ir_cron_change_standard" model="ir.cron">
+			<field name="name">Change student standard</field>
+			<field name="model_id" ref="school_management.model_student_student"/>
+			<field name="interval_number">1</field>
+			<field name="interval_type">days</field>
+			<field name="numbercall">-1</field>
+			<field name="code">school_management.change_standard()</field>
+			<field name="active" eval="True"/>
+		</record>
+	</data>
+</odoo>

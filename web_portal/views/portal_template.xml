@@ -1,0 +1,1311 @@
+<odoo>
+
+	<!-- fa-user-o -->
+
+	<template id="user_dropdown" inherit_id="portal.user_dropdown">
+		<xpath expr="//div[hasclass('dropdown-divider')]" position="after">
+			<a groups="base.group_user" href="/my/students" role="menuitem" class="dropdown-item ps-3">
+				<i class="fa fa-user-o small text-muted" style="padding-left:5px;"/>   School Profile
+			</a>
+		</xpath>
+	</template>
+	
+	<template id="portal_my_home" inherit_id="portal.portal_my_home">
+		<xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+			<t t-call="portal.portal_docs_entry">
+				<t t-set="title">Students</t>
+				<t t-set="url">/my/students</t>
+				<t t-set="placeholder_count" t-value="'student_counts'" />
+			</t>
+		</xpath>
+	</template>
+
+	<template id="portal_my_home_menu_students" inherit_id="portal.portal_breadcrumbs">
+		<xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+			<li t-attf-class="breadcrumb-item" t-if="page_name == 'student_profile_list_view'">
+				<b>Students</b></li>
+			<li t-attf-class="breadcrumb-item" t-if="page_name == 'student_form_view'">
+				<a href="/my/students">Students</a>
+			</li>           
+			<!-- /my/students/education_info -->
+			<li t-attf-class="breadcrumb-item" t-if="page_name == 'education_form_view'">
+				<a href="/my/students/">Educational Information</a>
+			</li> 
+			<li t-attf-class="breadcrumb-item" t-if="page_name == 'parent_form_view'">
+				<a href="/my/students/">Parent</a>
+			</li>
+			<li t-attf-class="breadcrumb-item" t-if="page_name == 'attendence_list_view'">
+				<a href="/my/students/">Attendence Sheet</a>
+			</li>
+			<li t-attf-class="breadcrumb-item" t-if="page_name == 'marksheet_form_view'">
+				<a href="/my/students/">Marksheet</a>
+			</li>
+			<li t-attf-class="breadcrumb-item" t-if="page_name == 'assignment_list_view'">
+				<a href="/my/students/">Assignment</a>
+			</li> 
+			<!-- exam_session_form_view -->
+			<li t-attf-class="breadcrumb-item" t-if="page_name == 'exam_session_form_view'">
+				<a href="/my/students/">Exam Session</a>
+			</li>
+			<li t-attf-class="breadcrumb-item" t-if="page_name == 'exam_form_view'">
+				<a href="/my/students/">Exam</a>
+			</li>
+			<li t-attf-class="breadcrumb-item" t-if="page_name == 'fees_form_view'">
+				<a href="/my/students/">Fees Details</a>
+			</li>
+			<li t-attf-class="breadcrumb-item" t-if="page_name == 'student_admissions_form'">
+				<a href="/my/students/">Admission Details</a>
+			</li>
+			<li t-attf-class="breadcrumb-item" t-if="page_name == 'submit_assignment_form_view'">
+				<a href="/my/students/">Submit Assignment</a>
+			</li>
+			<li t-attf-class="breadcrumb-item" t-if="page_name == 'student_result_form'">
+				<a href="/my/students/">Result</a>
+			</li>
+		</xpath>
+	</template>
+
+	<template id="students_profile_list_view_portal">
+		<t t-call="portal.portal_layout" >
+			<t t-call="portal.portal_table">	
+				<thead>
+					<span>
+						<h5 class="my-3"><t t-esc="user.name" /> <span>'s Document</span></h5>
+					</span>
+				</thead>
+				<tbody>		
+					<t t-foreach="students" t-as="student" >
+						<div class="row student_portal_view text">
+							<div class="col-12 col-sm-12 col-md-6 col-lg-3 p-2 student_tile_portal" style="margin-left:25px;">
+								<a class="row mr-0 ml-0 w-auto p-3 dashboard_element_main_body list-group-item-action d-flex align-items-center justify-content-between" style="background-color:#304cd5;" t-attf-href="/my/students/#{student.id}">
+									<div class="col-lg-12 text-right px-0"></div>
+									<div class="col-lg-12 text-center hover_effect">
+										<img class="image oe_portal_img mt15 mb25" style="width: 80px;" src="/web_portal/static/img/student profile.png"/>
+										<br/>
+										<br/>
+										<span class="" style="color: #fff;font-weight: bold;font-size: 16px;">Student Profile</span>
+									</div>
+								</a>
+							</div>
+							<div class="col-12 col-sm-12 col-md-6 col-lg-3 p-2 student_tile_portal" style="margin-left:25px;">
+								<a class="row mr-0 ml-0 w-auto p-3 dashboard_element_main_body list-group-item-action d-flex align-items-center justify-content-between" style="background-color:#E959AD;" t-attf-href="/my/education_info/#{student.id}">
+									<div class="col-lg-12 text-right px-0"></div>
+									<div class="col-lg-12 text-center hover_effect">
+										<img class="image oe_portal_img mt15 mb25" style="width: 80px;" src="/web_portal/static/img/education.png"/>
+										<br/>
+										<br/>
+										<span class="" style="color: #fff;font-weight: bold;font-size: 16px;">Educational Profile</span>
+									</div>
+								</a>
+							</div>
+							<div class="col-12 col-sm-12 col-md-6 col-lg-3 p-2 student_tile_portal" style="margin-left:25px;">
+								<a class="row mr-0 ml-0 w-auto p-3 dashboard_element_main_body list-group-item-action d-flex align-items-center justify-content-between" style="background-color:#02b0e0;" t-attf-href="/my/assignment/#{student.id}">
+									<div class="col-lg-12 text-right px-0"></div>
+									<div class="col-lg-12 text-center hover_effect">
+										<img class="image oe_portal_img mt15 mb25" style="width: 80px;" src="/web_portal/static/img/assignment.png"/>
+										<br/>
+										<br/>
+										<span class="" style="color: #fff;font-weight: bold;font-size: 16px;">Assignment</span>
+									</div>
+								</a>
+							</div>
+							<div class="col-12 col-sm-12 col-md-6 col-lg-3 p-2 student_tile_portal" style="margin-left:25px;">
+								<a class="row mr-0 ml-0 w-auto p-3 dashboard_element_main_body list-group-item-action d-flex align-items-center justify-content-between" style="background-color:#575756;" t-attf-href="/my/attendance_sheet/#{student.id}">
+									<div class="col-lg-12 text-right px-0"></div>
+									<div class="col-lg-12 text-center hover_effect">
+										<img class="image oe_portal_img mt15 mb25" style="width: 80px;" src="/web_portal/static/img/attendance.png"/>
+										<br/>
+										<br/>
+										<span class="" style="color: #fff;font-weight: bold;font-size: 16px;">Attendance</span>
+									</div>
+								</a>
+							</div>
+							<div class="col-12 col-sm-12 col-md-6 col-lg-3 p-2 student_tile_portal" style="margin-left:25px;">
+								<a class="row mr-0 ml-0 w-auto p-3 dashboard_element_main_body list-group-item-action d-flex align-items-center justify-content-between" style="background-color:#45ac34;" t-attf-href="/my/exam_session/#{student.id}">
+									<div class="col-lg-12 text-right px-0"></div>
+									<div class="col-lg-12 text-center hover_effect">
+										<img class="image oe_portal_img mt15 mb25" style="width: 80px;" src="/web_portal/static/img/exams.png"/>
+										<br/>
+										<br/>
+										<span class="" style="color: #fff;font-weight: bold;font-size: 16px;">Exams</span>
+									</div>
+								</a>
+							</div>
+							<div class="col-12 col-sm-12 col-md-6 col-lg-3 p-2 student_tile_portal" style="margin-left:25px;">
+								<a class="row mr-0 ml-0 w-auto p-3 dashboard_element_main_body list-group-item-action d-flex align-items-center justify-content-between" style="background-color:#304cd5;" t-attf-href="/my/marksheet/#{student.id}">
+									<div class="col-lg-12 text-right px-0"></div>
+									<div class="col-lg-12 text-center hover_effect">
+										<img class="image oe_portal_img mt15 mb25" style="width: 80px;" src="/web_portal/static/img/marksheet.png"/>
+										<br/>
+										<br/>
+										<span class="" style="color: #fff;font-weight: bold;font-size: 16px;">Grade Book</span>
+									</div>
+								</a>
+							</div>
+							<div class="col-12 col-sm-12 col-md-6 col-lg-3 p-2 student_tile_portal" style="margin-left:25px;">
+								<a class="row mr-0 ml-0 w-auto p-3 dashboard_element_main_body list-group-item-action d-flex align-items-center justify-content-between" style="background-color:#E959AD;" t-attf-href="/my/fees/#{student.id}">
+									<div class="col-lg-12 text-right px-0"></div>
+									<div class="col-lg-12 text-center hover_effect">
+										<img class="image oe_portal_img mt15 mb25" style="width: 80px;" src="/web_portal/static/img/fees.png"/>
+										<br/>
+										<br/>
+										<span class="" style="color: #fff;font-weight: bold;font-size: 16px;">Fees Details</span>
+									</div>
+								</a>
+							</div>
+							<div class="col-12 col-sm-12 col-md-6 col-lg-3 p-2 student_tile_portal" style="margin-left:25px;">
+								<a class="row mr-0 ml-0 w-auto p-3 dashboard_element_main_body list-group-item-action d-flex align-items-center justify-content-between" style="background-color:#575756;" t-attf-href="/my/parents/#{student.id}">
+									<div class="col-lg-12 text-right px-0"></div>
+									<div class="col-lg-12 text-center hover_effect">
+										<img class="image oe_portal_img mt15 mb25" style="width: 80px;opacity: 1;" src="/web_portal/static/img/parents.png" />
+										<br/>
+										<br/>
+										<span class="" style="color: #fff;font-weight: bold;font-size: 16px;">Parents Information</span>
+									</div>
+								</a>
+							</div>
+							<div class="col-12 col-sm-12 col-md-6 col-lg-3 p-2 student_tile_portal" style="margin-left:25px;">
+								<a class="row mr-0 ml-0 w-auto p-3 dashboard_element_main_body list-group-item-action d-flex align-items-center justify-content-between" style="background-color:#45ac34; " t-attf-href="/my/admissions/#{student.id}">
+									<div class="col-lg-12 text-right px-0"></div>
+									<div class="col-lg-12 text-center hover_effect">
+										<img class="image oe_portal_img mt15 mb25" style="width: 80px;" src="/web_portal/static/img/admission.png"/>
+										<br/>
+										<br/>
+										<span class="" style="color: #fff;font-weight: bold;font-size: 16px;">Admission Detail</span>
+									</div>
+								</a>
+							</div>
+						</div>
+					</t>
+				</tbody>
+			</t>
+		</t>
+	</template>
+
+	<!-- <template id="exam_list_view_portal">
+		<t t-call="portal.portal_layout" >
+			<t t-call="portal.portal_table">
+				<thead>
+					<tr class="active">
+						<th class="text-left">GR NO.</th>
+						<th class="text-left">Name</th>
+						<th class="text-left">Mobile</th>
+						<th class="text-left">Email</th>
+						<th class="text-left">Standard</th>
+						<th class="text-left">Division</th>
+					</tr>
+				</thead>
+				<tbody>
+					<t t-foreach="students" t-as="student" >
+						<tr>
+							<td class="text-left">
+								<a t-attf-href="/my/students/#{student.id}">
+									<t t-out="student.grno" />
+								</a>
+							</td>
+							<td class="text-left">
+								<t t-out="student.name" />
+							</td>
+							<td class="text-left">
+								<t t-out="student.mobile" />
+							</td>
+							<td class="text-left">
+								<t t-out="student.email" />
+							</td>
+							<td class="text-left">
+								<t t-out="student.standard_id.name" />
+							</td>
+							<td class="text-left">
+								<t t-out="student.division_id.name" />
+							</td>
+						</tr>
+					</t>					
+				</tbody>
+			</t>
+		</t>
+	</template> -->
+
+	<template id="students_form_view_portal" inherit_id="portal.portal_sidebar">
+		<xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+			<!-- <div class="row mt16" > -->
+			<t t-if="page_name == 'student_form_view'" >
+				<section style="background-color: #eee;" align="center">
+					<div name="student_portal_form_view" align="center">
+						<div class="container py-5 col-8 text-center" id="student_profile" >
+							<div class="container py-5 " id="personal_info">
+								<div class="row" align="center">
+									<div class="col-12" align="center">
+										<div class="card mb-4" align="center">
+											<div class="card-body text-center">
+												<img t-if="student.image" t-att-src="image_data_uri(student.image)" style="max-width:3.5cm; min-height:3.0cm;margin:15px;"/>
+												<h5 class="my-3"><t t-out="student.name" /></h5>
+												<hr />
+												<div class="row">
+													<div class="col-12">	
+														<div class="row">
+															<div class="col-6 col-lg-4 col-md-6 mb-2">
+																<div class="media">
+																	<img src="/web_portal/static/img/gender.png" class="img-fluid mr-2" alt="Gender" title="Gender" style="width: 20px;" loading="lazy" />
+																	<div class="media-body">
+																		<strong class="text-secondary">Gender</strong>
+																		<p class="text-muted mb-0"><t t-out="student.gender" /></p>
+																	</div>
+																</div>
+															</div>
+															<div class="col-6 col-lg-4 col-md-6 mb-2">
+																<div class="media">
+																	<img src="/web_portal/static/img/calendar.png" class="img-fluid mr-2" alt="Birth Date" title="Birth Date" style="width: 20px;" loading="lazy" />
+																	<div class="media-body">
+																		<strong class="text-secondary">Birth Date</strong>
+																		<p class="text-muted mb-0"><t t-out="student.dob" /></p>
+																	</div>
+																</div>
+															</div>
+															<div class="col-6 col-lg-4 col-md-6 mb-2">
+																<div class="media">
+																	<img src="/web_portal/static/img/smartphone.png" class="img-fluid mr-2" alt="Mobile" title="Mobile" style="width: 20px;" loading="lazy" />
+																	<div class="media-body">
+																		<strong class="text-secondary">Mobile</strong>
+																		<p class="text-muted mb-0"><t t-out="student.mobile" /></p>
+																	</div>
+																</div>
+															</div>
+															<br/>
+															<br/>
+															<div class="col-6 col-lg-4 col-md-6 mb-2" style="margin-top:20px;">
+																<div class="media">
+																	<img src="/web_portal/static/img/email.png" class="img-fluid mr-2" alt="Email" title="Email" style="width: 20px;" loading="lazy" />
+																	<div class="media-body">
+																		<strong class="text-secondary">Email</strong>
+																		<p class="text-muted mb-0"><t t-out="student.email" /></p>
+																	</div>
+																</div>
+															</div>
+															<div class="col-6 col-lg-4 col-md-6 mb-2" style="margin-top:20px;">
+																<div class="media">
+																	<img src="/web_portal/static/img/home.png" class="img-fluid mr-2" alt="Address" title="Address" style="width: 25px;" loading="lazy" />
+																	<div class="media-body">
+																		<strong class="text-secondary">Address</strong>
+																		<p class="text-muted mb-0"><t t-out="student.address" /></p>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div> 
+												</div>
+												<br/>
+												<br/>
+												<div class="row">
+													<div class="col-4 text-center" style="margin-top:20px;">
+														<div class="media">
+															<a t-attf-href="/my/students/print/{{student.id}}" class="fa fa-download"> ID Card</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="container py-5 text-left">
+								<h1 class="text-left">Chatter Feature</h1>
+								<t t-call="portal.message_thread">
+									<t t-set="object" t-value="student"/>
+								</t>
+							</div>
+						</div>
+					</div>
+				</section>
+			</t>
+			<!-- </div> -->
+		</xpath>
+	</template>
+
+	<template id="education_form_view_portal" inherit_id="portal.portal_sidebar">
+		<xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+			<t t-if="page_name == 'education_form_view'" >
+				<t t-call="portal.portal_table">
+					<div class=" py-2 col-8">
+						<table class="card-body mt16 table table-condensed">
+							<thead style="background-color: #f0f5fa">
+								<tr>
+									<th>Standard</th>
+									<th class="text-center">Division</th>
+									<th>Subjects</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<span><t t-out="student.standard_id.name" /></span>
+									</td>
+									<td class="text-center">
+										<span><t t-out="student.division_id.name" /></span>
+									</td>
+									<td  class="text-left">
+										<t t-foreach="student.standard_id.subject_ids" t-as="subject" >
+											<li>
+												<t t-out="subject.name" />
+											</li>
+										</t>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="container py-5">
+						<h1>Chatter Feature</h1>
+						<t t-call="portal.message_thread">
+							<t t-set="object" t-value="student"/>
+						</t>
+					</div>
+				</t>
+			</t>
+		</xpath>
+	</template>
+
+	<template id="parents_form_view_portal" inherit_id="portal.portal_sidebar">
+		<xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+			<!-- <div class="row mt16" > -->
+			<t t-if="page_name == 'parent_form_view'" >
+				<section class="vh-80" style="background-color: #f4f5f7;">
+					<div class="container py-5 h-100">
+						<div class="row d-flex justify-content-center align-items-center h-100">
+							<div class="col col-lg-8 mb-4 mb-lg-0">
+								<t t-foreach="parent" t-as="parent">
+									<div class="card mb-3" style="border-radius: .5rem;">
+										<div class="row g-0">
+											<div class="col-md-4 gradient-custom text-center text-white"
+												style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; background: linear-gradient(to top right, #000066 0%, #ffffcc 100%);">
+												<img t-if="parent.image" t-att-src="image_data_uri(parent.image)" style="max-width:3.5cm; min-height:3.0cm;margin-top:30px;"/>
+												<hr/>
+												<h5><t t-out="parent.name" /></h5>
+												<br/>
+												<span><strong>Gender : </strong></span>
+												<t t-out="parent.gender" />
+												<br/>
+												<span><strong>Relation : </strong></span>
+												<t t-out="parent.relation" />
+											</div>
+											<div class="col-md-8">
+												<div class="card-body p-4">
+													<h6>Information</h6>
+													<hr class="mt-0 mb-4" />
+													<div class="row pt-1">
+														<div class="col-6 mb-3">
+															<div class="media">
+																<img src="/web_portal/static/img/smartphone.png" class="img-fluid mr-2" alt="Mobile" title="Mobile" style="width: 20px;" loading="lazy" />
+																<div class="media-body">
+																	<strong class="text-secondary">Mobile</strong>
+																	<p class="text-muted mb-0"><t t-out="parent.phone" /></p>
+																</div>
+															</div>
+														</div>
+														<div class="col-6 mb-3">
+															<div class="media">
+																<img src="/web_portal/static/img/email.png" class="img-fluid mr-2" alt="Mobile" title="Mobile" style="width: 20px;" loading="lazy" />
+																<div class="media-body">
+																	<strong class="text-secondary">Mobile</strong>
+																	<p class="text-muted mb-0"><t t-out="parent.email" /></p>
+																</div>
+															</div>
+														</div>
+													</div>
+													<h6>Students </h6>
+													<hr class="mt-0 mb-4" />
+													<div class="row pt-1">
+														<t t-call="portal.portal_table">
+															<thead>
+																<tr class="active">
+																	<th class="text-left">GR NO.</th>
+																	<th class="text-left">Name</th>
+																	<!-- <th class="text-left">Mobile</th>
+																	<th class="text-left">Email</th> -->
+																	<th class="text-left">Standard</th>
+																	<th class="text-left">Division</th>
+																</tr>
+															</thead>
+															<tbody>
+																<t t-foreach="parent.student_ids" t-as="student" >
+																	<tr>
+																		<td class="text-left">
+																			<a t-attf-href="/my/students/#{student.id}">
+																				<t t-out="student.grno" />
+																			</a>
+																		</td>
+																		<td class="text-left">
+																			<t t-out="student.name" />
+																		</td>
+																		<!-- <td class="text-left">
+																			<t t-out="student.mobile" />
+																		</td>
+																		<td class="text-left">
+																			<t t-out="student.email" />
+																		</td> -->
+																		<td class="text-left">
+																			<t t-out="student.standard_id.name" />
+																		</td>
+																		<td class="text-left">
+																			<t t-out="student.division_id.name" />
+																		</td>
+																	</tr>
+																</t>					
+															</tbody>
+														</t>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="container py-5">
+										<h1>Chatter Feature</h1>
+										<t t-call="portal.message_thread">
+											<t t-set="object" t-value="parent"/>
+										</t>
+									</div>
+								</t>
+							</div>
+						</div>
+					</div>
+				</section>
+			</t>
+		</xpath>
+	</template>
+
+	<template id="attendence_list_view_portal">
+		<t t-call="portal.portal_layout" >
+			<t t-call="portal.portal_table">
+				<thead>
+					<tr class="active">
+						<th>Attendance Sheet</th>
+						<th class="text-center">Date</th>
+						<th class="text-center">Present ? </th>
+						<th class="text-center">Absent ? </th>
+						<th>Remark</th>
+						<th>Standard</th>
+						<th class="text-center">Division</th>
+					</tr>
+				</thead>
+				<tbody>
+					<t t-foreach="students" t-as="student" >
+						<tr>
+							<td>
+								<span><t t-out="student.attendence_id.name" /></span>
+							</td>
+							<td class="text-center">
+								<span><t t-out="student.attendence_date" /></span>
+							</td>
+							<td class="text-center">
+								<span><t t-out="student.present" /></span>
+							</td>
+							<td class="text-center">
+								<span><t t-out="student.absent" /></span>
+							</td>
+							<td>
+								<span><t t-out="student.remark" /></span>
+							</td>
+							<td>
+								<span><t t-out="student.standard_id.name" /></span>
+							</td>
+							<td class="text-center">
+								<span><t t-out="student.division_id.name" /></span>
+							</td>
+						</tr>
+					</t>
+				</tbody>
+			</t>
+		</t>
+	</template>
+
+	<template id="marksheet_form_view_portal" inherit_id="portal.portal_sidebar">
+		<xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+			<t t-if="page_name == 'marksheet_form_view'" >
+				<t t-call="portal.portal_table">
+					<div class=" py-2 col-8">
+						<table class="card-body mt16 table table-condensed">
+							<thead style="background-color: #f0f5fa">
+								<tr>
+									<th>Exam Session</th>
+									<th class="text-center">Total Marks </th>
+									<th class="text-center">Percentage</th>
+									<th class="text-center">Grade</th>
+									<th class="text-center">Result</th>
+									<th class="text-center">Download</th>
+								</tr>
+							</thead>
+							<tbody>
+								<t t-foreach="students" t-as="student" >
+									<tr>
+										<td>
+											<a t-attf-href="/my/result/#{student.id}">
+												<span><t t-out="student.result_line_ids.exam_id.session_id.name" /></span>
+											</a>
+										</td>
+										<td class="text-center">
+											<span><t t-out="student.total_marks" /></span>
+										</td>
+										<td class="text-center">
+											<span><t t-out="student.get_rounded_value(student.percentage)" /></span>
+										</td>
+										<td class="text-center">
+											<span><t t-out="student.grade" /></span>
+										</td>
+										<td class="text-center">
+											<span><t t-out="student.status" /></span>
+										</td>
+										<td class="text-center">
+											<span><a t-attf-href="/my/marksheet/print/{{student.id}}" class="fa fa-download" /></span>
+										</td>
+									</tr>
+								</t>
+							</tbody>
+						</table>
+					</div>
+					<!-- <div class="container py-5">
+						<h1>Chatter Feature</h1>
+						<t t-call="portal.message_thread">
+							<t t-set="object" t-value="students"/>
+						</t>
+					</div> -->
+				</t>
+			</t>
+		</xpath>
+	</template>
+
+	<!-- <template id="exam_list_view_portal">
+		<t t-call="portal.portal_layout" >
+			<t t-if="page_name == 'exam_list_view'" >
+				<t t-call="portal.portal_table">
+					<thead>
+						<tr class="active">
+							<th class="text-left">Exam Session</th>
+							<th class="text-left">Start Date</th>
+							<th class="text-left">End Date</th>
+							<th class="text-left">Standard</th>
+							<th class="text-left">Exam Type</th>
+							<th class="text-left">Evaluation Type</th>
+							<th class="text-left">Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<t t-foreach="exam" t-as="exam" >
+							<tr>
+								<td class="text-left">
+									<a t-attf-href="/my/students/#{student.id}">
+										<t t-out="exam.name" />
+									</a>
+								</td>
+								<td class="text-left">
+									<t t-out="exam.start_date" />
+								</td>
+								<td class="text-left">
+									<t t-out="exam.end_date" />
+								</td>
+								<td class="text-left">
+									<t t-out="exam.standard_id.name" />
+								</td>
+								<td class="text-left">
+									<t t-out="exam.exam_type" />
+								</td>
+								<td class="text-left">
+									<t t-out="exam.evaluation_type" />
+								</td>
+								<td class="text-left">
+									<t t-out="exam.state" />
+								</td>
+							</tr>
+						</t>					
+					</tbody>
+				</t>
+			</t>
+		</t>
+	</template> -->
+
+	<template id="exam_session_form_view_portal" inherit_id="portal.portal_sidebar">
+		<xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+			<t t-if="page_name == 'exam_session_form_view'" >
+				<t t-call="portal.portal_table">
+					<div class=" py-2 col-8">
+						<table class="card-body mt16 table table-condensed">
+							<thead style="background-color: #f0f5fa">
+								<tr>
+									<th>Name</th>
+									<th>Code</th>
+									<th>Standard </th>
+									<th>Start Date</th>
+									<th>End Date</th>
+									<th>Status</th>
+									<!-- <th>Download</th> -->
+								</tr>
+							</thead>
+							<tbody>
+								<t t-foreach="students" t-as="student" >
+									<tr>
+										<td>
+											<a t-attf-href="/my/exam/#{student.id}">
+												<span><t t-out="student.name" /></span>
+											</a>
+										</td>
+										<td>
+											<span><t t-out="student.code" /></span>
+										</td>
+										<td>
+											<span><t t-out="student.standard_id.name" /></span>
+										</td>
+										<td>
+											<span><t t-out="student.start_date" /></span>
+										</td>
+										<td>
+											<span><t t-out="student.end_date" /></span>
+										</td>
+										<td>
+											<span><t t-out="student.state" /></span>
+										</td>
+										<!-- <td class="text-center">
+											<span><a t-attf-href="/my/exam_session/print/{{student.id}}" class="fa fa-download" /></span>
+										</td> -->
+									</tr>
+								</t>
+							</tbody>
+						</table>
+					</div>
+					<!-- <div class="container py-5">
+						<h1>Chatter Feature</h1>
+						<t t-call="portal.message_thread">
+							<t t-set="object" t-value="students"/>
+						</t>
+					</div> -->
+				</t>
+			</t>
+		</xpath>
+	</template>
+
+	<template id="exam_form_view_portal" inherit_id="portal.portal_sidebar">
+		<xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+			<t t-if="page_name == 'exam_form_view'" >
+				<t t-call="portal.portal_table">
+					<div class=" py-2 col-8">
+						<table class="card-body mt16 table table-condensed">
+							<thead style="background-color: #f0f5fa">
+								<tr>
+									<th>Exam Session</th>
+									<th>Exam</th>
+									<th>Subject </th>
+									<th>Start Time</th>
+									<th>End Time</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<t t-foreach="students" t-as="student" >
+									<tr>
+										<td>
+											<span><t t-out="student.session_id.name" /></span>
+										</td>
+										<td>
+											<span><t t-out="student.name" /></span>
+										</td>
+										<td>
+											<span><t t-out="student.subject_id.name" /></span>
+										</td>
+										<td>
+											<span><t t-out="student.start_time" /></span>
+										</td>
+										<td>
+											<span><t t-out="student.end_time" /></span>
+										</td>
+										<td>
+											<span><t t-out="student.state" /></span>
+										</td>
+									</tr>
+								</t>
+							</tbody>
+						</table>
+					</div>
+					<!-- <div class="container py-5">
+						<h1>Chatter Feature</h1>
+						<t t-call="portal.message_thread">
+							<t t-set="object" t-value="students"/>
+						</t>
+					</div> -->
+				</t>
+			</t>
+		</xpath>
+	</template>
+
+	<template id="fees_form_view_portal" inherit_id="portal.portal_sidebar">
+		<xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+			<t t-if="page_name == 'fees_form_view'" >
+				<t t-call="portal.portal_table">
+					<div class=" py-2 col-8">
+						<table class="card-body mt16 table table-condensed">
+							<thead style="background-color: #f0f5fa">
+								<tr>
+									<th class="text-center">Submit Date</th>
+									<th class="text-center">Fees Amount </th>
+									<th class="text-center">Invoice Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<t t-foreach="students" t-as="student" >
+									<tr>
+										<td class="text-center">
+											<span><t t-out="student.date" /></span>
+										</td>
+										<td class="text-center">
+											<span><t t-out="student.amount" /></span>
+										</td>
+										<td class="text-center">
+											<span><t t-out="student.state" /></span>
+										</td>
+									</tr>
+								</t>
+							</tbody>
+						</table>
+					</div>
+				</t>
+			</t>
+		</xpath>
+	</template>
+
+	<template id="assignment_list_view_portal" inherit_id="portal.portal_sidebar">
+		<xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+			<t t-if="page_name == 'assignment_list_view'" >
+				<t t-call="portal.portal_table">
+					<div class=" py-2 col-8">
+						<table class="card-body mt16 table table-condensed">
+							<thead style="background-color: #f0f5fa">
+								<tr>
+									<th>Assignment</th>
+									<th>Teacher Name</th>
+									<th>Subject Name</th>
+									<th>Assign Date</th>
+									<th>Due Date</th>
+									<th>Submit Assignment</th>
+								</tr>
+							</thead>
+							<tbody>
+								<t t-foreach="teacher_assignments" t-as="student" >
+									<tr>
+										<td class="text-left">
+											<span><t t-out="student.name" /></span>
+										</td>
+										<td class="text-left">
+											<span><t t-out="student.teacher_id.name" /></span>
+										</td>
+										<td class="text-left">
+											<span><t t-out="student.subject_id.name" /></span>
+										</td>
+										<td class="text-left">
+											<span><t t-out="student.assign_date" /></span>
+										</td>
+										<td class="text-left">
+											<span><t t-out="student.due_date" /></span>
+										</td>
+										<td class="text-left">
+											<span>
+												<t t-foreach="student.student_assignment_ids.filtered(lambda r: r.student_id.id == student_id.id)" t-as="assignment">
+													<t t-if="assignment.state == 'draft'">
+														<span class="media">
+															<a t-attf-href="/my/submit_assignment/#{student.id}">
+																<image src="/web_portal/static/img/submit.png" class="img-fluid mr-2" alt="Submit" title="Submit" style="width: 80px;" loading="lazy" />
+															</a>
+														</span> 
+													</t>
+													<t t-if="assignment.state == 'active'">
+														<span class="media">
+															<img src="/web_portal/static/img/done.png" class="img-fluid mr-2" alt="Submitted" title="Submitted" style="width: 20px;" loading="lazy" />
+															<span class="media-body">
+																Submitted
+															</span>
+														</span> 
+													</t>
+												</t>
+											</span>
+										</td>
+									</tr>
+								</t>
+							</tbody>
+						</table>
+					</div>
+				</t>
+			</t>
+		</xpath>
+	</template>
+
+	<template id="student_admissions_form_template" inherit_id="portal.portal_sidebar">
+		<xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+			<div class="row mt16" >
+				<t t-if="page_name == 'student_admissions_form'" >
+					<section style="background-color: #eee;">
+						<div class="container py-5">
+							<div class="row">
+								<div class="col-lg-4">
+									<div class="card mb-4">
+										<div class="card-body">
+											<div class="text-center">
+												<img t-if="admission.photo" t-att-src="image_data_uri(admission.photo)" style="max-width:3.5cm; min-height:3.0cm;margin-top:5px;"/>
+											</div>
+											<h5 class="my-3 text-center"><t t-out="admission.name + ' ' + admission.last_name" /></h5>
+											<hr />
+											<span class="text-center text-primary mb-1"><strong><h5><b>Class Information</b></h5></strong></span>
+											<div class="text-muted mb-1"><span><strong>GR No. : </strong></span><t t-out="admission.grno"/></div>
+											<div class="text-muted mb-1"><span><strong>Department : </strong></span><t t-out="admission.medium_id.name"/></div>
+											<div class="text-muted mb-1"><span><strong>Standard : </strong></span><t t-out="admission.standard_id.name"/></div>
+											<div class="text-muted"><span><strong>Division : </strong></span><t t-out="admission.division_id.name"/></div>
+										</div>
+									</div>
+									<div class="card mb-1 mb-lg-0">
+										<div class="card-body p-0">
+											<br/>
+											<span class="text-center text-primary mb-1"><strong><h5><b>Contact Information</b></h5></strong></span>
+											<ul class="list-group list-group-flush rounded-3" style="margin-left: 7px;">
+												<li class="list-group-item d-flex justify-content-between align-items-center p-3">
+													<img src="/web_portal/static/img/smartphone.png" class="img-fluid mr-2" alt="Mobile" title="Mobile" style="width: 20px;" loading="lazy" />
+													<p class="mb-0"><t t-out="admission.phone"/></p>
+												</li>
+												<li class="list-group-item d-flex justify-content-between align-items-center p-3">
+													<img src="/web_portal/static/img/email.png" class="img-fluid mr-2" alt="Mobile" title="Mobile" style="width: 20px;" loading="lazy" />
+													<p class="mb-0"><t t-out="admission.email"/></p>
+												</li>
+												<li class="list-group-item d-flex justify-content-between align-items-center p-3">
+													<div class="media">
+														<img src="/web_portal/static/img/home.png" class="img-fluid mr-2" alt="Address" title="Address" style="width: 25px;" loading="lazy" />
+														<p class="mb-0">
+															<t t-out="admission.street"/><br/>
+															<t t-out="admission.city + ' - ' + admission.zipcode"/><br/>
+															<t t-out="admission.states"/>
+														</p>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-8">
+									<div class="card mb-4">
+										<div class="card-body">
+											<span class="text-center text-primary mb-1"><strong><h5><b>Parents Information</b></h5></strong></span>
+											<div class="row">
+												<div class="col-sm-4">
+													<p class="mb-0">Father Name</p>
+												</div>
+												<div class="col-sm-8">
+													<p class="text-muted mb-0"><t t-out="admission.fname"/></p>
+												</div>
+											</div>
+											<hr/>
+											<div class="row">
+												<div class="col-sm-4">
+													<p class="mb-0">Father's Designation</p>
+												</div>
+												<div class="col-sm-8">
+													<p class="text-muted mb-0"><t t-out="admission.fdesignation"/></p>
+												</div>
+											</div>
+											<hr/>
+											<div class="row">
+												<div class="col-sm-4">
+													<p class="mb-0">Father's Phone No. </p>
+												</div>
+												<div class="col-sm-8">
+													<p class="text-muted mb-0"><t t-out="admission.fphone"/></p>
+												</div>
+											</div>
+											<hr/>
+											<div class="row">
+												<div class="col-sm-4">
+													<p class="mb-0">Mother Name</p>
+												</div>
+												<div class="col-sm-8">
+													<p class="text-muted mb-0"><t t-out="admission.mname"/></p>
+												</div>
+											</div>
+											<hr/>
+											<div class="row">
+												<div class="col-sm-4">
+													<p class="mb-0">Mother's Designation</p>
+												</div>
+												<div class="col-sm-8">
+													<p class="text-muted mb-0"><t t-out="admission.mdesignation"/></p>
+												</div>
+											</div>
+											<hr/>
+											<div class="row">
+												<div class="col-sm-4">
+													<p class="mb-0">Mother's Phone No. </p>
+												</div>
+												<div class="col-sm-8">
+													<p class="text-muted mb-0"><t t-out="admission.mphone"/></p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="card mb-4 mb-md-0">
+												<div class="card-body">
+													<div class="row">
+														<br/>
+														<span class="text-center text-primary mb-1"><strong><h5><b>Personal Information</b></h5></strong></span>
+														<div class="col-sm-5">
+															<p class="mb-0">Gender</p>
+														</div>
+														<div class="col-sm-7">
+															<p class="text-muted mb-0"><t t-out="admission.gender"/></p>
+														</div>
+													</div>
+													<hr/>
+													<div class="row">
+														<div class="col-sm-5">
+															<p class="mb-0">Date of Birth</p>
+														</div>
+														<div class="col-sm-7">
+															<p class="text-muted mb-0"><t t-out="admission.date_of_birth"/></p>
+														</div>
+													</div>
+													<hr/>
+													<div class="row">
+														<div class="col-sm-5">
+															<p class="mb-0">Age</p>
+														</div>
+														<div class="col-sm-7">
+															<p class="text-muted mb-0"><t t-out="admission.age"/></p>
+														</div>
+													</div>
+													<hr/>
+													<div class="row">
+														<div class="col-sm-5">
+															<p class="mb-0">Mother Tongue</p>
+														</div>
+														<div class="col-sm-7">
+															<p class="text-muted mb-0"><t t-out="admission.mother_tongue"/></p>
+														</div>
+													</div>
+													<hr/>
+													<div class="row">
+														<div class="col-sm-5">
+															<p class="mb-0">Category</p>
+														</div>
+														<div class="col-sm-7">
+															<p class="text-muted mb-0"><t t-out="admission.category"/></p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="card mb-4 mb-md-0">
+												<div class="card-body">
+													<span class="text-center text-primary mb-1"><strong><h5><b>Previous School Information</b></h5></strong></span>
+													<div class="row">
+														<div class="col-sm-4">
+															<p class="mb-0">School Name</p>
+														</div>
+														<div class="col-sm-8">
+															<p class="text-muted mb-0"><t t-out="admission.previous_school_ids"/></p>
+														</div>
+													</div>
+													<hr/>
+													<div class="row">
+														<div class="col-sm-4">
+															<p class="mb-0">GR No.</p>
+														</div>
+														<div class="col-sm-8">
+															<p class="text-muted mb-0"><t t-out="admission.registration_no"/></p>
+														</div>
+													</div>
+													<hr/>
+													<div class="row">
+														<div class="col-sm-4">
+															<p class="mb-0">Exit Date</p>
+														</div>
+														<div class="col-sm-8">
+															<p class="text-muted mb-0"><t t-out="admission.exit_date"/></p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="container py-5">
+							<h1>Chatter Feature</h1>
+							<t t-call="portal.message_thread">
+								<t t-set="object" t-value="admission"/>
+							</t>
+						</div>
+					</section>
+					<!-- <section class="h-100 h-custom gradient-custom-2">
+						<div class="container py-5 h-100">
+							<div class="row d-flex justify-content-center align-items-center h-100">
+								<div class="col-12">
+									<div class="card card-registration card-registration-2" style="border-radius: 15px;">
+										<div class="card-body p-0">
+											<div class="row g-0">
+												<div class="col-lg-6">
+													<div class="p-5">
+														<h3 class="fw-normal mb-5" style="color: #4835d4;">General Infomation</h3>
+														<div class="mb-4 pb-2">
+															<select class="select">
+																<option value="1">Title</option>
+																<option value="2">Two</option>
+																<option value="3">Three</option>
+																<option value="4">Four</option>
+															</select>
+														</div>
+														<div class="row">
+															<div class="col-md-6 mb-4 pb-2">
+																<div class="form-outline">
+																	<input type="text" id="form3Examplev2" class="form-control form-control-lg" />
+																	<label class="form-label" for="form3Examplev2">First name</label>
+																</div>
+															</div>
+															<div class="col-md-6 mb-4 pb-2">
+																<div class="form-outline">
+																<input type="text" id="form3Examplev3" class="form-control form-control-lg" />
+																<label class="form-label" for="form3Examplev3">Last name</label>
+																</div>
+															</div>
+														</div>
+														<div class="mb-4 pb-2">
+															<select class="select">
+																<option value="1">Position</option>
+																<option value="2">Two</option>
+																<option value="3">Three</option>
+																<option value="4">Four</option>
+															</select>
+														</div>
+														<div class="mb-4 pb-2">
+															<div class="form-outline">
+																<input type="text" id="form3Examplev4" class="form-control form-control-lg" />
+																<label class="form-label" for="form3Examplev4">Position</label>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-6 mb-4 pb-2 mb-md-0 pb-md-0">
+																<div class="form-outline">
+																	<input type="text" id="form3Examplev5" class="form-control form-control-lg" />
+																	<label class="form-label" for="form3Examplev5">Bussines Arena</label>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<select class="select">
+																	<option value="1">Employees</option>
+																	<option value="2">Two</option>
+																	<option value="3">Three</option>
+																	<option value="4">Four</option>
+																</select>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-6 bg-indigo text-white">
+													<div class="p-5">
+														<h3 class="fw-normal mb-5">Contact Details</h3>
+														<div class="mb-4 pb-2">
+															<div class="form-outline form-white">
+																<input type="text" id="form3Examplea2" class="form-control form-control-lg" />
+																<label class="form-label" for="form3Examplea2">Street + Nr</label>
+															</div>
+														</div>
+														<div class="mb-4 pb-2">
+															<div class="form-outline form-white">
+																<input type="text" id="form3Examplea3" class="form-control form-control-lg" />
+																<label class="form-label" for="form3Examplea3">Additional Information</label>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-5 mb-4 pb-2">
+																<div class="form-outline form-white">
+																	<input type="text" id="form3Examplea4" class="form-control form-control-lg" />
+																	<label class="form-label" for="form3Examplea4">Zip Code</label>
+																</div>
+															</div>
+															<div class="col-md-7 mb-4 pb-2">
+																<div class="form-outline form-white">
+																	<input type="text" id="form3Examplea5" class="form-control form-control-lg" />
+																	<label class="form-label" for="form3Examplea5">Place</label>
+																</div>
+															</div>
+														</div>
+														<div class="mb-4 pb-2">
+															<div class="form-outline form-white">
+																<input type="text" id="form3Examplea6" class="form-control form-control-lg" />
+																<label class="form-label" for="form3Examplea6">Country</label>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-5 mb-4 pb-2">
+																<div class="form-outline form-white">
+																	<input type="text" id="form3Examplea7" class="form-control form-control-lg" />
+																	<label class="form-label" for="form3Examplea7">Code +</label>
+																</div>
+															</div>
+															<div class="col-md-7 mb-4 pb-2">
+																<div class="form-outline form-white">
+																	<input type="text" id="form3Examplea8" class="form-control form-control-lg" />
+																	<label class="form-label" for="form3Examplea8">Phone Number</label>
+																</div>
+															</div>
+														</div>
+														<div class="mb-4">
+															<div class="form-outline form-white">
+																<input type="text" id="form3Examplea9" class="form-control form-control-lg" />
+																<label class="form-label" for="form3Examplea9">Your Email</label>
+															</div>
+														</div>
+														<div class="form-check d-flex justify-content-start mb-4 pb-3">
+															<input class="form-check-input me-3" type="checkbox" value="" id="form2Example3c" />
+															<label class="form-check-label text-white" for="form2Example3">
+																I do accept the <a href="#!" class="text-white">Terms and Conditions</a> of your
+																site.
+															</label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section> -->
+				</t>
+			</div>
+		</xpath>
+	</template>
+
+	<template id="submit_assignment_form_view_portal" inherit_id="portal.portal_sidebar">
+		<xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+			<t t-if="page_name == 'submit_assignment_form_view'" >
+				<t t-call="portal.portal_table">
+					<t t-foreach="teacher_assignments" t-as="teacher_assignments">
+						<section class="vh-100" style="background-color: #FFFFFF;">
+							<div class="container h-100">
+							<div class="row d-flex justify-content-center align-items-center h-100">
+								<div class="col-xl-9">
+								<h1 class="text-primary mb-4">Assignment Submission</h1>
+								<div class="card" style="border-radius: 15px;">
+									<div class="card-body">
+										<form method="POST" enctype="multipart/form-data" >
+											<div class="row align-items-center pt-4 pb-3">
+												<div class="col-md-3 ps-5">
+													<h6 class="mb-0">Assignment</h6>
+												</div>
+												<div class="col-md-9 pe-5">
+													<t t-out="student.name" />
+												</div>
+											</div>
+											<hr class="mx-n1"/>
+											<div class="row align-items-center py-3">
+												<div class="col-md-3 ps-5">
+													<h6 class="mb-0">Student Name</h6>
+												</div>
+												<div class="col-md-9 pe-5">
+													<t t-out="students.name" />
+												</div>
+											</div>
+											<hr class="mx-n1"/>
+											<div class="row align-items-center py-3">
+												<div class="col-md-3 ps-5">
+													<h6 class="mb-0">Submission Type</h6>
+												</div>
+												<div class="col-md-9 pe-5">
+													<t t-out="teacher_assignments.submission_type" />
+												</div>
+											</div>
+											<t t-if="teacher_assignments.submission_type != 'hardcopy'" >
+												<!-- <hr class="mx-n1"/> -->
+												<!-- <div class="row align-items-center py-3">
+													<div class="col-md-3 ps-5">
+														<h6 class="mb-0">File Format</h6>
+													</div>
+													<div class="col-md-9 pe-5">
+														<input type="text" class="form-control form-control-lg" placeholder="PDF or DOC" name="file_format"/>
+													</div>
+												</div> -->
+												<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+												<hr class="mx-n1"/>
+												<div class="row align-items-center py-3">
+													<div class="col-md-3 ps-5">
+														<h6 class="mb-0">Upload File</h6>
+													</div>
+													<div class="col-md-9 pe-5">
+														<input class="form-control form-control-lg" type="file" id="file_data" name="file_data" accept=".pdf" required="required" />
+													</div>
+												</div>
+											</t>
+											<hr class="mx-n1"/>
+											<div class="px-5 py-4">
+												<button type="submit" class="btn btn-primary btn-lg">Submit Assignment</button>
+											</div>
+										</form>
+									</div>
+								</div>
+								</div>
+							</div>
+							</div>
+						</section>
+					</t>
+				</t>
+			</t>
+		</xpath>
+	</template>
+
+	<template id="student_result_form_template" inherit_id="portal.portal_sidebar">
+		<xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+			<t t-if="page_name == 'student_result_form'" >
+				<t t-call="portal.portal_table">
+					<div class=" py-2 col-8">
+						<table class="card-body mt16 table table-condensed">
+							<thead style="background-color: #f0f5fa">
+								<tr>
+									<th>Exam</th>
+									<th class="text-center">Marks </th>
+									<th class="text-center">Grade</th>
+									<th class="text-center">Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<t t-foreach="student.result_line_ids" t-as="student" >
+									<tr>
+										<td>
+											<span><t t-out="student.exam_id.name" /></span>
+										</td>
+										<td class="text-center">
+											<span><t t-out="student.marks" /></span>
+										</td>
+										<td class="text-center">
+											<span><t t-out="student.grade" /></span>
+										</td>
+										<td class="text-center">
+											<span><t t-out="student.status" /></span>
+										</td>
+									</tr>
+								</t>
+							</tbody>
+						</table>
+					</div>
+				</t>
+			</t>
+		</xpath>
+	</template>
+
+	<template id="assignment_submitted_portal" inherit_id="portal.portal_sidebar">
+		<xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+			<t t-if="page_name == 'assignment_submitted'" >
+				<t t-call="portal.portal_table">
+					<div class=" py-2 col-8">
+						<div class="card-body">
+							<h1>Thank you Your Assignment Has Been Successfully Submitted.</h1>
+						</div>
+					</div>
+				</t>
+			</t>
+		</xpath>
+	</template>
+
+</odoo>

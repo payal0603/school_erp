@@ -1,0 +1,49 @@
+<odoo>
+
+	<data noupdate="1">
+
+		<record id="gradeconfig1" model="student.grade.configuration">
+			<field name="min_per">91</field>
+			<field name="max_per">100</field>
+			<field name="result">A+</field>
+		</record>
+
+		<record id="gradeconfig2" model="student.grade.configuration">
+			<field name="min_per">81</field>
+			<field name="max_per">90</field>
+			<field name="result">A</field>
+		</record>
+
+		<record id="gradeconfig4" model="student.grade.configuration">
+			<field name="min_per">71</field>
+			<field name="max_per">80</field>
+			<field name="result">B</field>
+		</record>
+
+		<record id="gradeconfig5" model="student.grade.configuration">
+			<field name="min_per">61</field>
+			<field name="max_per">70</field>
+			<field name="result">C</field>
+		</record>
+
+		<record id="gradeconfig6" model="student.grade.configuration">
+			<field name="min_per">51</field>
+			<field name="max_per">60</field>
+			<field name="result">D</field>
+		</record>
+
+		<record id="gradeconfig7" model="student.grade.configuration">
+			<field name="min_per">36</field>
+			<field name="max_per">49</field>
+			<field name="result">E</field>
+		</record>
+
+		<record id="gradeconfig8" model="student.grade.configuration">
+			<field name="min_per">0</field>
+			<field name="max_per">35</field>
+			<field name="result">Fail</field>
+		</record>
+
+	</data>
+
+</odoo>

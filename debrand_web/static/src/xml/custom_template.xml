@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-extend="web.database_manager" t-name="web_custom_database_manager">
+        <t t-jquery="div.o_database_manager_logo" t-operation="replace"></t>
+    </t>
+    <t t-extend="web.database_selector" t-name="web_custom_database_selector">
+        <t t-jquery="div.o_database_selector_logo" t-operation="replace"></t>
+    </t>
+</templates>

@@ -1,0 +1,75 @@
+<odoo>
+	
+	<menuitem id="menu_student_timetable_root"
+			  name="Timetable"
+			  parent="menu_school_mgmnt_root"
+			  sequence="5"/>
+
+	<record id="action_student_timing" model="ir.actions.act_window">
+		<field name="name">Timing Of Timetable</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">student.timing</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="menu_student_timing"
+			  name="Timing"
+			  parent="menu_student_timetable_root"
+			  action="action_student_timing"
+			  sequence="1"/>
+
+	<record id="view_student_timing_tree" model="ir.ui.view">
+			<field name="name">student.timing.tree</field>
+			<field name="model">student.timing</field>
+			<field name="arch" type="xml">
+				<tree string="Timing" editable="bottom" sample="1">
+					<field name="name" />
+					<field name="hour" />
+					<field name="minute" />
+					<field name="duration" />
+					<field name="am_pm" />
+					<field name="sequence" />
+				</tree>
+			</field>
+	</record>
+
+	<record id="view_student_timing_form" model="ir.ui.view">
+		<field name="name">student.timing.form</field>
+		<field name="model">student.timing</field>
+		<field name="arch" type="xml">
+			<form string="Timing">
+				<sheet>
+					<group>
+						<group col="4" colspan="4">
+							<field name="name" />
+							<field name="hour" />
+							<field name="minute" />
+							<field name="duration" />
+							<field name="am_pm" />
+							<field name="sequence" />
+						</group>	
+					</group>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" />
+					<field name="message_ids" />
+				</div>
+			</form>
+		</field>
+	</record>
+
+	<record id="view_student_timing_search" model="ir.ui.view">
+		<field name="name">student.timing.search</field>
+		<field name="model">student.timing</field>
+		<field name="arch" type="xml">
+			<search string="Timing">
+				<field name="name"/>
+				<field name="hour" />
+				<field name="minute" />
+				<field name="duration" />
+				<field name="am_pm" />
+			</search>
+		</field>
+	</record>
+
+</odoo>

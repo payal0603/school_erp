@@ -1,0 +1,120 @@
+<odoo>
+
+	<menuitem id="menu_school_examination_root"
+			  name="Examination"
+			  parent="menu_school_mgmnt_root"
+			  sequence="6"/>
+
+	<record id="action_student_exam" model="ir.actions.act_window">
+		<field name="name">Exam Details</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">student.exam</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="menu_student_exam"
+			  name="Exam Details"
+			  parent="menu_school_examination_root"
+			  action="action_student_exam" 
+			  sequence="2"/>
+
+	<record id="view_student_exam_tree" model="ir.ui.view">
+		<field name="name">student.exam.tree</field>
+		<field name="model">student.exam</field>
+		<field name="arch" type="xml">
+			<tree string="Exam" sample="1" >
+				<field name="session_id"/>
+				<field name="name"/>
+				<field name="subject_id"/>
+				<field name="code"/>
+				<field name="start_time"/>
+				<field name="end_time"/>
+				<field name="state"/>
+				<field name="total_marks" optional="show"/>
+				<field name="min_marks" optional="show"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="view_student_exam_form" model="ir.ui.view">
+		<field name="name">student.exam.form</field>
+		<field name="model">student.exam</field>
+		<field name="arch" type="xml">
+			<form string="Exam">
+				<header>
+					<button name="act_done" states="result_updated" type="object" string="Done" class="oe_highlight" groups="base.group_system, school_management.group_school_admin"/>
+					<button name="act_draft" states="cancel" type="object" string="Draft" class="oe_highlight"/>
+					<button string="Result Updated" class="oe_highlight" states="held" type="object" name="act_result_updated" groups="base.group_system, school_management.group_school_admin"/>
+					<button name="act_cancel" states="draft,held,schedule" type="object" string="Cancel"/>
+					<field name="state" widget="statusbar"
+						   statusbar_visible="draft,held,scheduled,result_updated,done"/>
+				</header>
+				<sheet>
+					<field name="active" invisible="1"/>
+					<widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+							attrs="{'invisible': [('active', '=', True)]}"/>
+					<group>
+						<field name="session_id" required="1" options="{'no_open': True}" />
+						<field name="name"/>
+						<field name="standard_id" options="{'no_open': True}" />
+						<field name="subject_id" context="{'standard_id':standard_id}" options="{'no_open': True}" />
+						<field name="code"/>
+						<field name="start_time"/>
+						<field name="end_time"/>
+						<field name="total_marks"/>
+						<field name="min_marks"/>
+					</group>
+					<notebook>
+						<page string="Attendees">
+							<field name="attendees_line_ids" nolabel="1">
+								<tree>
+									<field name="exam_id" />
+									<field name="student_id" options="{'no_open': True}" />
+									<field name="standard_id" options="{'no_open': True}" />
+									<field name="division_id" context="{'standard_id' : standard_id}" options="{'no_open': True}" />
+									<field name="status" />
+									<field name="marks" />
+								</tree>
+							</field>
+						</page>
+					</notebook>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+					<field name="message_ids" widget="mail_thread"/>
+				</div>
+			</form>
+		</field>
+	</record>
+
+	<record id="view_student_exam_search" model="ir.ui.view">
+		<field name="name">student.exam.search</field>
+		<field name="model">student.exam</field>
+		<field name="arch" type="xml">
+			<search string="Exam">
+				<field name="session_id"/>
+				<field name="name"/>
+				<field name="subject_id"/>
+				<field name="code"/>
+				<field name="start_time"/>
+				<field name="end_time"/>
+				<field name="state"/>
+				<field name="total_marks"/>
+				<field name="min_marks"/>
+				<filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+				<newline/>
+				<group expand="0" string="Group By...">
+					<filter string="Subject" name="group_by_exam_subject_id"
+							domain="[]" context="{'group_by':'subject_id'}"/>
+					<filter string="Exam Code" name="group_by_code"
+							domain="[]" context="{'group_by':'code'}"/>
+					<filter string="State" name="group_by_exam_state"
+							domain="[]" context="{'group_by':'state'}"/>
+					<filter string="Exam" name="group_by_exam_name"
+							domain="[]" context="{'group_by':'name'}"/>
+				</group>
+			</search>
+		</field>
+	</record>  
+	
+</odoo>

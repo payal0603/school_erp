@@ -1,0 +1,70 @@
+<odoo>
+	
+	<record id="action_student_subject" model="ir.actions.act_window">
+		<field name="name">Subject Detail</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">student.subject</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="menu_school_subject_management"
+			  name="Subject Management"
+			  parent="menu_school_configuration_root"
+			  sequence="6"/>
+
+	<menuitem id="menu_school_subject_detail"
+			  name="Subject Details"
+			  parent="menu_school_subject_management"
+			  action="action_student_subject"
+			  sequence="1"/>
+
+	<record id="view_student_subject_tree" model="ir.ui.view">
+		<field name="name">student.subject.tree</field>
+		<field name="model">student.subject</field>
+		<field name="arch" type="xml">
+			<tree string="Subject" sample="1">
+				<field name="name"/>
+				<!-- <field name="code"/> -->
+				<field name="type"/>
+				<field name="subject_type"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="view_student_subject_form" model="ir.ui.view">
+		<field name="name">student.subject.tree</field>
+		<field name="model">student.subject</field>
+		<field name="arch" type="xml">
+			<form string="Subject">
+				<header/>
+				<sheet>
+					<group>
+						<group col="4" colspan="4">
+							<field name="name"/>
+							<!-- <field name="code"/> -->
+							<field name="type"/>
+							<field name="subject_type"/>
+						</group>
+					</group>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" />
+					<field name="message_ids" />
+				</div>
+			</form>
+		</field>
+	</record>
+
+	<record id="view_student_subject_search" model="ir.ui.view">
+		<field name="name">student.subject.search</field>
+		<field name="model">student.subject</field>
+		<field name="arch" type="xml">
+			<search string="Subject">
+				<field name="name"/>
+				<!-- <field name="code"/> -->
+				<field name="type"/>
+			</search>
+		</field>
+	</record>
+
+</odoo>

@@ -1,0 +1,14 @@
+<odoo>
+	<data noupdate="1">
+		<record id="result_template_1" model="student.result.template">
+			<field name="name">Standard 1st Annual</field>
+			<field name="result_date" eval='(DateTime.today())'/>
+			<field name="exam_session_id" ref="exam_session_1"/>
+		</record>
+		<record id="result_template_2" model="student.result.template">
+			<field name="name">Standard 8th Annual</field>
+			<field name="result_date" eval='(DateTime.today())'/>
+			<field name="exam_session_id" ref="exam_session_2"/>
+		</record>
+	</data>
+</odoo>

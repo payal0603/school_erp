@@ -1,0 +1,152 @@
+<odoo>
+	
+	<record id="action_student_timetable" model="ir.actions.act_window">
+		<field name="name">Timetable</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">student.timetable</field>
+		<field name="view_mode">tree,kanban,form</field>
+	</record>
+
+	<menuitem id="menu_student_timetable"
+			  name="Timetable"
+			  parent="menu_student_timetable_root"
+			  action="action_student_timetable"
+			  sequence="2"/>
+
+	<record id="view_student_timetable_tree" model="ir.ui.view">
+			<field name="name">student.timetable.tree</field>
+			<field name="model">student.timetable</field>
+			<field name="arch" type="xml">
+				<tree string="Timetable" sample="1" >
+					<field name="name" />
+					<field name="timing_id" />
+					<field name="duration" />
+					<field name="state" />
+					<field name="standard_id" optional="hide" />
+					<field name="start_time" optional="hide" />
+					<field name="end_time" optional="hide" />
+					<field name="division_id" optional="hide" />
+					<field name="subject_id" optional="hide" />
+					<field name="classroom_id" optional="hide" />
+					<field name="teacher_id" optional="hide" />
+				</tree>
+			</field>
+	</record>
+
+	<record id="view_student_timetable_kanban" model="ir.ui.view">
+		<field name="name">student.timetable.kanban</field>
+		<field name="model">student.timetable</field>
+		<field name="arch" type="xml">
+			<kanban>
+				<field name="name"/>
+				<templates>
+					<t t-name="kanban-box">
+						<div>
+							<div class="oe_kanban_content">
+								<div>
+									<strong>
+										<field name="timing_id"/>
+									</strong>
+								</div>
+								<div class="oe_kanban_left">
+									<li>
+										<b>Teacher : </b>
+										<field name="teacher_id"/>
+									</li>
+									<li>
+										<b>Standard : </b>
+										<field name="standard_id"/>
+									</li>
+									<li>
+										<b>Division : </b>
+										<field name="division_id"/>
+									</li>
+									<li>
+										<b>Subject : </b>
+										<field name="subject_id"/>
+									</li>
+									<li>
+										<b>Start : </b>
+										<field name="start_time"/>
+									</li>
+									<li>
+										<b>End : </b>
+										<field name="end_time"/>
+									</li>
+								</div>
+							</div>
+						</div>
+					</t>
+				</templates>
+			</kanban>
+		</field>
+	</record>
+
+	<record id="view_student_timetable_form" model="ir.ui.view">
+		<field name="name">student.timetable.form</field>
+		<field name="model">student.timetable</field>
+		<field name="arch" type="xml">
+			<form string="Timetable">
+				<header>
+					<button class="oe_highlight" name="lec_confirm" type="object" string="Confirm" states="draft" />
+					<button class="oe_highlight" name="lec_done" type="object" string="Done" states="confirm" groups="base.group_system, school_management.group_school_admin, school_management.group_school_teacher"/>
+					<button class="oe_highlight" name="lec_draft" type="object" string="Set to Draft" states="cancel" />
+					<button name="lec_cancel" type="object" string="Cancel" states="draft,confirm" />
+					<field name="state" widget="statusbar" statusbar_visible="draft,confirm" />
+				</header>
+				<sheet>
+					<group>
+						<group string="Timetable Information">
+							<field name="name" />
+							<field name="timing_id" options="{'no_open': True}" />
+							<field name="start_time" />
+							<field name="end_time" />
+							<field name="duration" />
+							<field name="type"/>
+						</group>
+						<group string="Class Information">
+							<field name="standard_id" />
+							<field name="division_id" context="{'standard_id':standard_id}" options="{'no_open': True}" />
+							<field name="subject_id" context="{'standard_id':standard_id}" options="{'no_open': True}" />
+							<field name="classroom_id" context="{'standard_id':standard_id}" options="{'no_open': True}" groups="school_management.group_school_student"/>
+							<field name="teacher_id" options="{'no_open': True}" />
+						</group>	
+					</group>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" />
+					<field name="message_ids" />
+				</div>
+			</form>
+		</field>
+	</record>
+	
+	<record id="view_student_timetable_search" model="ir.ui.view">
+		<field name="name">student.timetable.search</field>
+		<field name="model">student.timetable</field>
+		<field name="arch" type="xml">
+			<search string="Timetable">
+				<field name="name"/>
+				<field name="timing_id" />
+				<field name="start_time" />
+				<field name="end_time" />
+				<field name="duration" />
+				<field name="standard_id" />
+				<field name="division_id" />
+				<field name="subject_id" />
+				<field name="classroom_id" />
+				<field name="teacher_id" />
+				<separator/>
+				<group expand="1" string="Group By">
+					<filter string="Standard" name="standard_id" context="{'group_by':'standard_id'}"/>
+					<filter string="Name" name="name" context="{'group_by':'name'}"/>
+					<filter name="confirm" string="Confirm" domain="[('state','=','confirm')]"/>
+					<filter name="done" string="Done" domain="[('state', '=', 'done')]"/>
+					<filter name="cancel" string="Cancelled" domain="[('state', '=', 'cancel')]"/>
+					<filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+				</group>
+			</search>
+		</field>
+	</record>
+	
+</odoo>

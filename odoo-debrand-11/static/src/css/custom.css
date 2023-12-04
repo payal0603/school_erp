@@ -1,0 +1,9 @@
+/* Hide Odoo logo in the database selector page */
+#database_manager .o_database_manager_logo {
+    display: none !important;
+}
+
+/* Hide Odoo logo in the database manager page */
+.o_web_database_management .o_database_logo {
+    display: none !important;
+}

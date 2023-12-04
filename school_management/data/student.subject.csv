@@ -1,0 +1,14 @@
+id,name,type,subject_type
+sub_1,Maths,both,compulsory
+sub_2,Science,theory,compulsory
+sub_3,Social Science,theory,compulsory
+sub_4,English,theory,compulsory
+sub_5,Gujarati,theory,compulsory
+sub_6,Hindi,theory,compulsory
+sub_7,Sanskrit,theory,compulsory
+sub_8,Drawing,both,compulsory
+sub_9,Computer,both,compulsory
+sub_10,Physical Training,both,compulsory
+sub_11,Biology,both,compulsory
+sub_12,Chemistry,both,compulsory
+sub_13,Physics,theory,compulsory

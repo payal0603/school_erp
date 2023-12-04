@@ -1,0 +1,2 @@
+# o16_odoo_debranding
+o16_odoo_debranding

@@ -1,0 +1,86 @@
+<odoo>
+
+	<record id="action_report_fees_detail_analysis" model="ir.actions.report">
+		<field name="name">Fees Detail Analysis</field>
+		<field name="model">student.student</field>
+		<field name="report_type">qweb-pdf</field>
+		<field name="report_name">school_management.report_fees_analysis</field>
+		<field name="report_file">school_management.report_fees_analysis</field>
+		<field name="print_report_name">'Student Fee Reciept - %s' % (object.student_id.name)</field>
+		<field name="binding_model_id"></field>
+	</record>
+
+	<record id="action_report_student_idcard" model="ir.actions.report">
+		<field name="name">Student ID Card</field>
+		<field name="model">student.student</field>
+		<field name="report_type">qweb-pdf</field>
+		<field name="report_name">school_management.report_student_idcard</field>
+		<field name="report_file">school_management.report_student_idcard</field>
+		<field name="print_report_name">'Student ID Card - %s' % (object.name)</field>
+		<field name="binding_model_id" ref="school_management.model_student_student" />
+		<field name="binding_type">report</field>
+	</record>
+
+	<record id="action_report_teacher_idcard" model="ir.actions.report">
+		<field name="name">Teacher ID Card</field>
+		<field name="model">student.teacher</field>
+		<field name="report_type">qweb-pdf</field>
+		<field name="report_name">school_management.report_teacher_idcard</field>
+		<field name="report_file">school_management.report_teacher_idcard</field>
+		<field name="print_report_name">'Teacher ID Card - %s' % (object.name)</field>
+		<field name="binding_model_id" ref="school_management.model_student_teacher" />
+		<field name="binding_type">report</field>
+	</record>
+
+	<record id="report_marksheet" model="ir.actions.report">
+		<field name="name">Marksheet</field>
+		<field name="model">student.marksheet.line</field>
+		<field name="report_type">qweb-pdf</field>
+		<field name="report_name">school_management.report_marksheet_report</field>
+		<field name="report_file">school_management.report_marksheet_report</field>
+		<field name="print_report_name">'Student Marksheet - %s' % (object.student_id.name)</field>
+		<field name="binding_model_id" ref="model_student_marksheet_line"/>
+		<field name="binding_type">report</field>
+	</record>
+
+	<record id="report_student_timetable_generate" model="ir.actions.report">
+		<field name="name">TimeTable for Students</field>
+		<field name="model">student.timetable</field>
+		<field name="report_type">qweb-pdf</field>
+		<field name="report_name">school_management.report_timetable_student_generate</field>
+		<field name="report_file">school_management.report_timetable_student_generate</field>
+		<field name="print_report_name">'Student Time Table Report </field>
+		<field name="binding_model_id"></field>
+	</record>
+	
+	<record id="report_teacher_timetable_generate" model="ir.actions.report">
+		<field name="name">TimeTable for Faculties</field>
+		<field name="model">student.timetable</field>
+		<field name="report_type">qweb-pdf</field>
+		<field name="report_name">school_management.report_timetable_teacher_generate</field>
+		<field name="report_file">school_management.report_timetable_teacher_generate</field>
+		<field name="print_report_name">'Teacher Time Table Report - %s' % (object.teacher_id.name)</field>
+		<field name="binding_model_id"></field>
+	</record> 
+
+	<record id="action_report_student_attendance" model="ir.actions.report">
+		<field name="name">Generate Attendance</field>
+		<field name="model">student.student</field>
+		<field name="report_type">qweb-pdf</field>
+		<field name="report_name">school_management.student_attendence_report</field>
+		<field name="report_file">school_management.student_attendence_report</field>
+		<field name="print_report_name">'Student Attendence Report - %s' % (object.name)</field>
+		<field name="binding_model_id"></field>
+	</record>
+
+	<record id="action_student_hall_ticket_report" model="ir.actions.report">
+		<field name="name">Student Hall Ticket</field>
+		<field name="model">student.exam.session</field>
+		<field name="report_type">qweb-pdf</field>
+		<field name="report_name">school_management.student_hall_ticket_report</field>
+		<field name="report_file">school_management.student_hall_ticket_report</field>
+		<field name="print_report_name">Hall Ticket </field>
+		<field name="binding_model_id"></field>
+	</record>
+
+</odoo>

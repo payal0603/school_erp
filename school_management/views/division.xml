@@ -1,0 +1,58 @@
+<odoo>
+	
+	<record id="action_student_division" model="ir.actions.act_window">
+		<field name="name">Division Detail</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">student.division</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="menu_school_division_detail"
+			  name="Division Details"
+			  parent="menu_school_standard_management"
+			  action="action_student_division"
+			  sequence="2"/>
+
+	<record id="view_student_division_tree" model="ir.ui.view">
+		<field name="name">student.division.tree</field>
+		<field name="model">student.division</field>
+		<field name="arch" type="xml">
+			<tree string="Division" sample="1">
+				<field name="name"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="view_student_division_form" model="ir.ui.view">
+		<field name="name">student.division.tree</field>
+		<field name="model">student.division</field>
+		<field name="arch" type="xml">
+			<form string="Division">
+				<header/>
+				<sheet>
+					<group>
+						<group col="4" colspan="4">
+							<field name="name"/>
+						</group>
+					</group>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" />
+					<field name="message_ids" />
+				</div>
+			</form>
+		</field>
+	</record>
+
+	<record id="view_student_division_search" model="ir.ui.view">
+		<field name="name">student.division.search</field>
+		<field name="model">student.division</field>
+		<field name="arch" type="xml">
+			<search string="Division">
+				<field name="name"/>
+			</search>
+		</field>
+	</record>
+
+
+</odoo>

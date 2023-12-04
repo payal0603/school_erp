@@ -1,0 +1,147 @@
+<odoo>
+	<data>
+		<record id="exam_1" model="student.exam">
+			<field name="code">STD-01-AN-Math</field>
+			<field name="name">Maths</field>
+			<field name="min_marks">35</field>
+			<field name="total_marks">100</field>
+			<field name="session_id" ref="exam_session_1"/>
+			<field name="subject_id" ref="school_management.sub_1"/>
+			<field name="start_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-10 04:30')"/>
+			<field name="end_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-10 06:30')"/>
+			<field name="state">done</field>
+		</record>
+		<record id="exam_2" model="student.exam">
+			<field name="code">STD-01-AN-Guj</field>
+			<field name="name">Gujarati</field>
+			<field name="min_marks">35</field>
+			<field name="total_marks">100</field>
+			<field name="session_id" ref="exam_session_1"/>
+			<field name="subject_id" ref="school_management.sub_5"/>
+			<field name="start_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-11 04:30')"/>
+			<field name="end_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-11 06:30')"/>
+			<field name="state">done</field>
+		</record>
+		<record id="exam_3" model="student.exam">
+			<field name="code">STD-01-AN-Drawing</field>
+			<field name="name">Drawing</field>
+			<field name="min_marks">35</field>
+			<field name="total_marks">100</field>
+			<field name="session_id" ref="exam_session_1"/>
+			<field name="subject_id" ref="school_management.sub_8"/>
+			<field name="start_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-12 04:30')"/>
+			<field name="end_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-12 06:30')"/>
+			<field name="state">done</field>
+		</record>
+		<record id="exam_4" model="student.exam">
+			<field name="code">STD-01-AN-PT</field>
+			<field name="name">Physical Training</field>
+			<field name="min_marks">35</field>
+			<field name="total_marks">100</field>
+			<field name="session_id" ref="exam_session_1"/>
+			<field name="subject_id" ref="school_management.sub_10"/>
+			<field name="start_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-14 04:30')"/>
+			<field name="end_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-14 05:30')"/>
+			<field name="state">done</field>
+		</record>
+		<record id="exam_5" model="student.exam">
+			<field name="code">STD-08-AN-MATH</field>
+			<field name="name">Maths</field>
+			<field name="min_marks">35</field>
+			<field name="total_marks">100</field>
+			<field name="session_id" ref="exam_session_2"/>
+			<field name="subject_id" ref="school_management.sub_1"/>
+			<field name="start_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-11 02:30')"/>
+			<field name="end_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-11 05:30')"/>
+			<field name="state">done</field>
+		</record>
+		<record id="exam_6" model="student.exam">
+			<field name="code">STD-08-AN-SCI</field>
+			<field name="name">Science</field>
+			<field name="min_marks">35</field>
+			<field name="total_marks">100</field>
+			<field name="session_id" ref="exam_session_2"/>
+			<field name="subject_id" ref="school_management.sub_2"/>
+			<field name="start_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-12 02:30')"/>
+			<field name="end_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-12 05:30')"/>
+			<field name="state">done</field>
+		</record>
+		<record id="exam_7" model="student.exam">
+			<field name="code">STD-08-AN-SS</field>
+			<field name="name">Social Science</field>
+			<field name="min_marks">35</field>
+			<field name="total_marks">100</field>
+			<field name="session_id" ref="exam_session_2"/>
+			<field name="subject_id" ref="school_management.sub_3"/>
+			<field name="start_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-13 02:30')"/>
+			<field name="end_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-13 05:30')"/>
+			<field name="state">done</field>
+		</record>
+		<record id="exam_8" model="student.exam">
+			<field name="code">STD-08-AN-ENG</field>
+			<field name="name">English</field>
+			<field name="min_marks">35</field>
+			<field name="total_marks">100</field>
+			<field name="session_id" ref="exam_session_2"/>
+			<field name="subject_id" ref="school_management.sub_4"/>
+			<field name="start_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-14 02:30')"/>
+			<field name="end_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-14 05:30')"/>
+			<field name="state">done</field>
+		</record>
+		<record id="exam_9" model="student.exam">
+			<field name="code">STD-08-AN-GJ</field>
+			<field name="name">Gujarati</field>
+			<field name="min_marks">35</field>
+			<field name="total_marks">100</field>
+			<field name="session_id" ref="exam_session_2"/>
+			<field name="subject_id" ref="school_management.sub_5"/>
+			<field name="start_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-16 02:30')"/>
+			<field name="end_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-16 05:30')"/>
+			<field name="state">done</field>
+		</record>
+		<record id="exam_10" model="student.exam">
+			<field name="code">STD-08-AN-HN</field>
+			<field name="name">Hindi</field>
+			<field name="min_marks">35</field>
+			<field name="total_marks">100</field>
+			<field name="session_id" ref="exam_session_2"/>
+			<field name="subject_id" ref="school_management.sub_6"/>
+			<field name="start_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-17 02:30')"/>
+			<field name="end_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-17 05:30')"/>
+			<field name="state">done</field>
+		</record>
+		<record id="exam_10" model="student.exam">
+			<field name="code">STD-08-AN-SAN</field>
+			<field name="name">Sanskrit</field>
+			<field name="min_marks">35</field>
+			<field name="total_marks">100</field>
+			<field name="session_id" ref="exam_session_2"/>
+			<field name="subject_id" ref="school_management.sub_7"/>
+			<field name="start_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-18 02:30')"/>
+			<field name="end_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-18 05:30')"/>
+			<field name="state">done</field>
+		</record>
+		<record id="exam_10" model="student.exam">
+			<field name="code">STD-08-AN-DRW</field>
+			<field name="name">Drawing</field>
+			<field name="min_marks">35</field>
+			<field name="total_marks">100</field>
+			<field name="session_id" ref="exam_session_2"/>
+			<field name="subject_id" ref="school_management.sub_8"/>
+			<field name="start_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-19 04:30')"/>
+			<field name="end_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-19 05:30')"/>
+			<field name="state">done</field>
+		</record>
+		<record id="exam_10" model="student.exam">
+			<field name="code">STD-08-AN-COM</field>
+			<field name="name">Computer</field>
+			<field name="min_marks">35</field>
+			<field name="total_marks">100</field>
+			<field name="session_id" ref="exam_session_2"/>
+			<field name="subject_id" ref="school_management.sub_9"/>
+			<field name="start_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-20 04:30')"/>
+			<field name="end_time" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-20 05:30')"/>
+			<field name="state">done</field>
+		</record>
+	</data>
+</odoo>
