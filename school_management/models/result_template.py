@@ -65,13 +65,11 @@ class StudentResultTemplate(models.Model):
 						'exam_id': exam.id,
 						'marks': str(attendee.marks and attendee.marks or 0),
 					})
-					print(">>>>>>>>>>>>",student_dict)
 					if attendee.student_id.id not in student_dict:
 						student_dict[attendee.student_id.id] = []
 					student_dict[attendee.student_id.id].append(result_line_id)
 
 			for student in student_dict:
-				print("<<<<<<<<<<<<<<<<<<<<<",student_dict)
 				marksheet_line_id = self.env['student.marksheet.line'].create({
 					'student_id': student,
 					'marksheet_reg_id': marksheet_reg_id.id,

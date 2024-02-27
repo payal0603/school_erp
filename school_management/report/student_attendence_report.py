@@ -12,7 +12,6 @@ class StudentAttendenceReport(models.AbstractModel):
 			return student.name
 
 	def get_data(self, data):
-		print(">>>>>>>>>DATA>>>>>>>>>>",data)
 		sheet_search = self.env['student.attendence.sheet'].search(
 			[('attendence_date', '>=', data['from_date']),
 			 ('attendence_date', '<=', data['to_date'])],
@@ -35,7 +34,6 @@ class StudentAttendenceReport(models.AbstractModel):
 	@api.model
 	def _get_report_values(self, docids, data):
 		model = self.env.context.get('active_model')
-		print(">>>>>>>>>>>>Model >>>>>>>>>>>>>>",model)
 		docs = self.env[model].browse(self.env.context.get('active_id'))
 		docargs = {
 			'doc_ids': self.ids,

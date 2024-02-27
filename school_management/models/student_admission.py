@@ -128,11 +128,8 @@ class StudentAdmission(models.Model):
 		for record in self:
 			if record.date_of_birth:
 				today = date.today()
-				print(">>>>>>>>>>>TODAY",today)
 				dob = record.date_of_birth	#.strptime("%Y-%m-%d").date()
-				print("??????????",dob)
 				age = relativedelta(today, dob).years
-				print("AGEEEEEEEEEEEEEEEEEEEEEEEE",age)
 				record.age = age
 			else:
 				record.age = 0
@@ -144,10 +141,8 @@ class StudentAdmission(models.Model):
 		self.state = 'cancel'
 
 	def admission_done(self):
-		print("......................fvdt")
 		if self.age < self.required_age:
 			raise ValidationError("Age of student should be greater than 6 years!")
-			#print("................................",self.street)
 		if (self.phone and len(self.phone) != 10) or (self.mobile and len(self.mobile) != 10) or (self.fphone and len(self.fphone) != 10) or (self.mphone and len(self.mphone) != 10):
 			raise ValidationError("Phone number must have 10 digits.")
 		if self.email:
@@ -176,10 +171,7 @@ class StudentAdmission(models.Model):
 			'department_id' : self.medium_id.id,
 			'academic_year_id' : self.academic_year_id.id
 		}
-		print("VALSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",vals)
 		stud = self.env['student.student'].create(vals)
-		print("VAL2222222222222222222222222",vals)
-		print("??????????????????????????????",stud)
 		self.state = 'done'
 
 	@api.model
@@ -195,7 +187,6 @@ class StudentAdmission(models.Model):
 		return super(StudentAdmission, self).create(vals)   
 
 	def unlink(self):
-		print("Deleting The Recorddddddddddddddddddddddddddd")
 		if self.state == 'done':
 			raise ValidationError("You Cannot Delete %s As It In Done State"%self.grno)
 		return super(StudentAdmission, self).unlink()

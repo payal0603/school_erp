@@ -29,13 +29,10 @@ class ReportTicket(models.AbstractModel):
 		return lst
 
 	def get_data(self, data):
-		print(">>>>>>>>>>>>>>>DATA 111111>>>>>>>>>>>",data)
 		final_lst = []
 		exam_session = self.env['student.exam.session'].browse(data['exam_session_id'][0])
-		print(">>>>>>>>>>>>>>>DATA >>>>>>>>>>>",data)
 		student_search = self.env['student.student'].search([('standard_id', '=', exam_session.standard_id.id)])
 		for student in student_search:
-			print("STUDNT>>>>>>>>>>>>>",student)
 			res = {
 				'exam': exam_session.name,
 				'code': exam_session.code,
@@ -45,7 +42,6 @@ class ReportTicket(models.AbstractModel):
 				'line': self.get_subject(exam_session),
 			}
 			final_lst.append(res)
-			print("<<<<<<<<<<<Final LST>>>>>>>>>", final_lst)
 		return final_lst
 
 	@api.model

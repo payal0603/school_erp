@@ -77,12 +77,8 @@ class ReportTimeTableTeacherGenerate(models.AbstractModel):
 
 	@api.model
 	def _get_report_values(self, docids, data):
-		print(">>>>>>>>>>DATA11 ",data)
 		active_model = self.env.context.get('active_model')
-		print(">>>>>>Model Teacher",active_model)
 		active_ids = self.env[active_model].browse(self.env.context.get('active_ids'))
-		print(">>>>>>>>>>Docs ",active_ids)
-		print(">>>>>>>>>>DATA ",data)
 		docargs = {
 			'doc_ids': self.ids,
 			'doc_model': active_model,

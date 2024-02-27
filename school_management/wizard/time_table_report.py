@@ -46,9 +46,7 @@ class TimetableReport(models.TransientModel):
 		template = self.env.ref(
 			'school_management.report_teacher_timetable_generate')
 		data = self.read(['start_date', 'end_date', 'standard_id', 'division_id', 'state','teacher_id'])[0]
-		print("<<<<<<<<<<<<DATASSSSSSSSSS>>>>>>>>>>>>>>>>>>>",data)
 		if data['state'] == 'student':
-			print("<<<<<<<<<<<<DATASSSSSSSSSS1111>>>>>>>>>>>>>>>>>>>",data)
 			time_table_ids = self.env['student.timetable'].search(
 				[('standard_id', '=', data['standard_id'][0]),
 				 ('division_id', '=', data['division_id'][0]),
@@ -56,7 +54,6 @@ class TimetableReport(models.TransientModel):
 				 ('end_time', '<=', data['end_date'])],
 				order='start_time asc')
 			data.update({'time_table_ids': time_table_ids.ids})
-			print("<<<<<<<<<<<<DATASSSSSSSSSS22222222>>>>>>>>>>>>>>>>>>>",data)
 			template = self.env.ref(
 				'school_management.report_student_timetable_generate')
 		else:

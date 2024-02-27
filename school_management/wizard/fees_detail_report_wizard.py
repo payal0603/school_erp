@@ -22,5 +22,4 @@ class FeesDetailReportWizard(models.TransientModel):
 
 		report = self.env.ref(
 			'school_management.action_report_fees_detail_analysis')
-		print(">>>>>>>>>DATA Report Action>>>>>>>>>>",data)
 		return report.report_action(self, data=data)

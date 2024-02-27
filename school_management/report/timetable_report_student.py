@@ -43,7 +43,6 @@ class ReportTimetableStudentGenerate(models.AbstractModel):
 
 	def get_object(self, data):
 		data_list = []
-		print(">>>>>>>>>DATA LISt>>>>>>>>>>",data_list)
 		for timetable_obj in self.env['student.timetable'].browse(
 				data['time_table_ids']):
 			oldDate = pytz.UTC.localize(
@@ -66,10 +65,7 @@ class ReportTimetableStudentGenerate(models.AbstractModel):
 	@api.model
 	def _get_report_values(self, docids, data):
 		model = self.env.context.get('active_model')
-		print(">>>>>>>>>>>>Model >>>>>>>>>>>>>>",model)
 		docs = self.env[model].browse(self.env.context.get('active_id', False))
-
-		print(">>>>>>>>>DOCS>>>>>>>>>>",docs)
 		docargs = {
 			'doc_ids': self.ids,
 			'doc_model': model,

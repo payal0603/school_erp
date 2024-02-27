@@ -60,11 +60,8 @@ class StudentTeacher(models.Model):
 		for record in self:
 			if record.date_of_birth:
 				today = date.today()
-				print(">>>>>>>>>>>TODAY",today)
 				dob = record.date_of_birth	#.strptime("%Y-%m-%d").date()
-				print("??????????",dob)
 				age = relativedelta(today, dob).years
-				print("AGEEEEEEEEEEEEEEEEEEEEEEEE",age)
 				record.age = age
 			else:
 				record.age = 0

@@ -27,11 +27,7 @@ class StudentResultLine(models.Model):
 	@api.depends('marks')
 	def _compute_grade(self):
 		for rec in self:
-			print('>>>>>>Gradessssssssssssss>>>>', rec.grade)
-			print('>>>>>>Gradessssssssssssss22222222222222222>>>>', rec.grade)
-			print('>>>>>>>>>>:::::::::::::::', rec.evaluation_type)
 			if rec.evaluation_type == 'grade':
-				print('>>>>>>>>>>', rec.evaluation_type)
 				grades = rec.marksheet_line_id.marksheet_reg_id.result_template_id.grade_ids
 				if grades:
 					for grade in grades:

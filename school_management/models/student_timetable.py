@@ -81,19 +81,15 @@ class StudentTimetable(models.Model):
 				rec.start_time).strftime("%A")
 
 	def lec_confirm(self):
-		print(">>>>>>>>>>>>>>>>>>")
 		self.state = 'confirm'
 
 	def lec_done(self):
-		print(">>>>>>>>>>>>>>>>>>")
 		self.state = 'done'
 
 	def lec_draft(self):
-		print(">>>>>>>>>>>>>>>>>>")
 		self.state = 'draft'
 
 	def lec_cancel(self):
-		print(">>>>>>>>>>>>>>>>>>")
 		self.state = 'cancel'
 
 	@api.constrains('teacher_id', 'timing_id', 'start_time', 'classroom_id',

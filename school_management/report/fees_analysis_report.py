@@ -23,16 +23,9 @@ class ReportFeesAnalysis(models.AbstractModel):
 	@api.model
 	def _get_report_values(self, docids, data):
 		student_ids = []
-		print(">>>>>>>>>DATA>>>>>>>>>>",data)
-		print(">>>>>>>>>DATA>>>>>>>>>>",student_ids)
 		if data['fees_filter'] == 'student':
-			print(">>>>>>>>>DATA>>>>>>>>>>",data)
-			print(">>>>>>>>>DATA>>>>>>>>>>",student_ids)
-		
 			student_ids = self.env['student.student'].browse([data['student']])
-			print(">>>>>>>>>DATA>>>>>>>>>>",data)
-			print(">>>>>>>>>DATA>>>>>>>>>>",student_ids)
-		
+			
 		else:
 			student_ids = self.env['student.student'].search(
 				[('standard_id', '=', data['standard'])])

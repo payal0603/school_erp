@@ -53,7 +53,6 @@ class StudentAttendenceSheet(models.Model):
 		
 	@api.model
 	def _name_search(self, name='', args=None, operator='ilike', limit=100, name_get_uid=None):
-		print("calllllllllledddddddddd", self._context,self)
 		if 'standard_id' in self._context:
 			standard_id = self._context.get('standard_id')
 			if standard_id:
